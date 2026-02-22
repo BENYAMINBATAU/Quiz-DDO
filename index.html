@@ -3,1072 +3,1085 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IDX Alpha Hunter — Pak Benyamin × Stockbit</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<title>DDO — BENYAMIN BATAU APP</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #020508;
-  --s1: #060d15;
-  --s2: #0a1520;
-  --border: #0f2035;
-  --border2: #1a3050;
-  --accent: #00d4ff;
-  --accent2: #0099cc;
-  --gold: #ffc107;
-  --green: #00e676;
-  --green2: #00c853;
-  --red: #ff1744;
-  --orange: #ff6d00;
-  --purple: #7c4dff;
-  --text: #b8cfe0;
-  --text2: #7a9ab8;
-  --mono: 'JetBrains Mono', monospace;
-  --head: 'Barlow Condensed', sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--mono);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+  :root {
+    --fire: #FF4500;
+    --gold: #FFD700;
+    --neon: #00FFCC;
+    --dark: #0A0A0F;
+    --panel: #12121A;
+    --card: #1A1A28;
+    --border: #2A2A40;
+    --text: #E8E8F0;
+    --sub: #8888AA;
+  }
 
-/* Animated radar sweep background */
-.radar-bg{
-  position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 60%),
-    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,212,255,0.02) 40px),
-    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,212,255,0.02) 40px);
-  pointer-events:none;z-index:0;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.wrap{max-width:1200px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;}
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* ═══════════ HEADER ═══════════ */
-.hdr{
-  background:var(--s1);
-  border:1px solid var(--border2);
-  border-top:3px solid var(--accent);
-  padding:24px 28px;
-  margin-bottom:16px;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:20px;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-}
-.hdr::after{
-  content:'ALPHA';
-  position:absolute;right:-15px;top:-15px;
-  font-family:var(--head);font-size:110px;font-weight:900;
-  color:rgba(0,212,255,0.03);pointer-events:none;line-height:1;
-}
-.hdr-tag{font-size:9px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:6px;}
-.hdr h1{font-family:var(--head);font-size:2rem;font-weight:900;color:#fff;line-height:1.1;}
-.hdr h1 b{color:var(--gold);}
-.hdr-sub{font-size:10px;color:var(--text2);line-height:1.8;margin-top:6px;max-width:550px;}
-.src-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
-.pill{font-size:8px;padding:3px 9px;border:1px solid;letter-spacing:1px;text-transform:uppercase;cursor:default;}
-.pill.y{border-color:#6200ea;color:#b388ff;background:rgba(98,0,234,0.1);}
-.pill.s{border-color:#00838f;color:#00e5ff;background:rgba(0,131,143,0.1);}
-.pill.i{border-color:#e65100;color:#ffab40;background:rgba(230,81,0,0.1);}
-.pill.b{border-color:#1565c0;color:#82b1ff;background:rgba(21,101,192,0.1);}
-.pill.f{border-color:#2e7d32;color:#69f0ae;background:rgba(46,125,50,0.1);}
-.pill.g{border-color:#b71c1c;color:#ff8a80;background:rgba(183,28,28,0.1);}
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(255,69,0,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,255,204,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
 
-.clock-box{text-align:right;}
-.clock-time{font-family:var(--head);font-size:2rem;font-weight:900;color:var(--accent);display:block;}
-.clock-date{font-size:9px;color:var(--text2);margin-top:2px;}
-.mkt-badge{
-  display:inline-block;font-size:9px;padding:4px 12px;margin-top:6px;
-  font-weight:700;letter-spacing:2px;text-transform:uppercase;
-}
-.mkt-badge.open{background:rgba(0,230,118,0.15);color:var(--green);border:1px solid var(--green);}
-.mkt-badge.closed{background:rgba(255,23,68,0.1);color:var(--red);border:1px solid rgba(255,23,68,0.4);}
+  /* SCREEN SYSTEM */
+  .screen { display: none; position: relative; z-index: 1; }
+  .screen.active { display: block; }
 
-/* ═══════════ CONTROLS ═══════════ */
-.ctrl{background:var(--s1);border:1px solid var(--border2);padding:20px;margin-bottom:12px;}
-.ctrl-hdr{font-size:9px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
-.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
-.pre{
-  font-family:var(--mono);font-size:9px;padding:6px 14px;
-  border:1px solid var(--border2);background:transparent;color:var(--text2);
-  cursor:pointer;transition:all 0.15s;letter-spacing:1px;text-transform:uppercase;
-}
-.pre:hover,.pre.on{border-color:var(--gold);color:var(--gold);background:rgba(255,193,7,0.07);}
-.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px;}
-.fl label{display:block;font-size:8px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
-.fl input,.fl select{
-  width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);
-  padding:9px 11px;font-family:var(--mono);font-size:11px;outline:none;transition:border-color 0.2s;
-}
-.fl input:focus,.fl select:focus{border-color:var(--accent);}
-.fl select option{background:var(--s2);}
-.fc{grid-column:1/-1;}
+  /* ===== DASHBOARD ===== */
+  #dashboard {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
 
-.btn-go{
-  width:100%;padding:15px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#000;border:none;
-  font-family:var(--head);font-size:16px;font-weight:900;
-  letter-spacing:4px;text-transform:uppercase;cursor:pointer;
-  transition:all 0.2s;position:relative;
-}
-.btn-go:hover:not(:disabled){filter:brightness(1.15);box-shadow:0 0 40px rgba(0,212,255,0.35);transform:translateY(-1px);}
-.btn-go:disabled{opacity:0.35;cursor:not-allowed;transform:none;}
+  .logo-area {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeDown 0.8s ease;
+  }
 
-/* ═══════════ PROGRESS ═══════════ */
-.prog{display:none;background:var(--s1);border:1px solid var(--border2);padding:18px;margin-bottom:14px;}
-.prog.show{display:block;}
-.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.prog-title{font-size:9px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;}
-.prog-pct{font-family:var(--head);font-size:1.4rem;font-weight:900;color:var(--gold);}
-.prog-track{height:6px;background:var(--border2);margin-bottom:10px;position:relative;overflow:hidden;}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));width:0%;transition:width 0.3s ease;position:relative;}
-.prog-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:rgba(255,255,255,0.3);filter:blur(4px);}
-.prog-log{font-size:9px;line-height:2;max-height:80px;overflow:hidden;}
-.lg{color:var(--text2);}
-.lg.ok{color:var(--green);}
-.lg.er{color:var(--red);}
-.lg.in{color:var(--gold);}
-.lg.sk{color:var(--text2);opacity:0.6;}
+  .logo-tag {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--neon);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
 
-/* ═══════════ SUMMARY ═══════════ */
-.sum{display:none;gap:1px;background:var(--border);border:1px solid var(--border2);margin-bottom:14px;}
-.sum.show{display:grid;grid-template-columns:repeat(7,1fr);}
-.si{background:var(--s1);padding:13px 10px;text-align:center;}
-.si .v{font-family:var(--head);font-size:1.5rem;font-weight:900;display:block;color:var(--accent);}
-.si .v.g{color:var(--green);}
-.si .v.r{color:var(--red);}
-.si .v.y{color:var(--gold);}
-.si .v.p{color:var(--purple);}
-.si .l{font-size:7px;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;display:block;}
+  .logo-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 10vw, 100px);
+    line-height: 0.9;
+    background: linear-gradient(135deg, var(--fire) 0%, var(--gold) 50%, var(--fire) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 3px;
+    filter: drop-shadow(0 0 30px rgba(255,69,0,0.4));
+  }
 
-/* ═══════════ TOOLBAR ═══════════ */
-.tb{display:none;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
-.tb.show{display:flex;}
-.tb-l{display:flex;gap:5px;align-items:center;font-size:8px;color:var(--text2);flex-wrap:wrap;}
-.tbtn{
-  font-family:var(--mono);font-size:8px;padding:5px 11px;
-  background:transparent;border:1px solid var(--border2);color:var(--text2);
-  cursor:pointer;transition:all 0.15s;letter-spacing:1px;text-transform:uppercase;
-}
-.tbtn:hover,.tbtn.on{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,0.05);}
-.tb-r input{
-  background:var(--s1);border:1px solid var(--border2);color:var(--text);
-  padding:6px 12px;font-family:var(--mono);font-size:10px;outline:none;width:180px;
-}
-.tb-r input:focus{border-color:var(--accent);}
+  .logo-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--sub);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
 
-/* ═══════════ CARDS ═══════════ */
-.card{
-  background:var(--s1);
-  border:1px solid var(--border2);
-  border-left:5px solid var(--border2);
-  margin-bottom:8px;
-  padding:14px 18px;
-  display:grid;
-  grid-template-columns:36px 170px 1fr 130px 110px;
-  gap:12px;
-  align-items:center;
-  animation:fadeUp 0.35s ease both;
-  transition:all 0.15s;
-  position:relative;
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.card:hover{background:var(--s2);border-color:rgba(0,212,255,0.25);transform:translateX(3px);}
-.card.up{border-left-color:var(--green);}
-.card.side{border-left-color:var(--gold);}
-.card.down{border-left-color:var(--red);}
+  .dashboard-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
 
-/* Profit tier glow */
-.card.tier-s{box-shadow:0 0 15px rgba(0,230,118,0.12);}
-.card.tier-a{box-shadow:0 0 10px rgba(255,193,7,0.08);}
+  .panel-header {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--neon);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-/* Profit tier badge */
-.tier-flag{
-  position:absolute;top:0;right:0;
-  font-family:var(--head);font-size:9px;font-weight:900;
-  padding:3px 10px;letter-spacing:2px;
-}
-.tier-flag.S{background:var(--green);color:#000;}
-.tier-flag.A{background:var(--gold);color:#000;}
-.tier-flag.B{background:rgba(0,212,255,0.2);color:var(--accent);}
-.tier-flag.C{background:rgba(255,255,255,0.05);color:var(--text2);}
+  .panel-header::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--neon);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--neon);
+    animation: pulse 2s infinite;
+  }
 
-/* Column: Rank */
-.c-rank{font-size:11px;color:var(--text2);text-align:center;}
-.c-rank span{display:block;font-family:var(--head);font-size:1.1rem;font-weight:900;color:var(--text);}
+  .form-group {
+    margin-bottom: 24px;
+  }
 
-/* Column: Info */
-.c-info .ticker{font-family:var(--head);font-size:1.3rem;font-weight:900;color:#fff;letter-spacing:1px;}
-.c-info .name{font-size:9px;color:var(--text2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;}
-.c-info .sector{font-size:7px;padding:2px 6px;border:1px solid var(--border2);color:var(--text2);margin-top:5px;display:inline-block;letter-spacing:1px;text-transform:uppercase;}
-.c-info .stockbit-link{
-  display:inline-flex;align-items:center;gap:4px;
-  margin-top:6px;font-size:8px;padding:4px 10px;
-  background:linear-gradient(135deg,#0052cc,#0066ff);
-  color:#fff;text-decoration:none;letter-spacing:1px;text-transform:uppercase;
-  transition:all 0.15s;
-}
-.c-info .stockbit-link:hover{filter:brightness(1.2);transform:scale(1.03);}
+  .form-label {
+    display: block;
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--sub);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
 
-/* Column: Indicators */
-.c-ind{}
-.sigs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px;}
-.sig{font-size:7px;padding:2px 6px;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;}
-.sig.bull{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(0,230,118,0.25);}
-.sig.bear{background:rgba(255,23,68,0.1);color:var(--red);border:1px solid rgba(255,23,68,0.25);}
-.sig.neu{background:rgba(255,193,7,0.1);color:var(--gold);border:1px solid rgba(255,193,7,0.25);}
-.sig.info{background:rgba(0,212,255,0.07);color:var(--accent);border:1px solid rgba(0,212,255,0.2);}
+  .form-input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    outline: none;
+    transition: all 0.3s ease;
+  }
 
-.ta-grid{display:flex;gap:10px;font-size:9px;flex-wrap:wrap;margin-bottom:7px;}
-.ta-item{display:flex;flex-direction:column;align-items:center;min-width:30px;}
-.ta-v{font-size:10px;color:var(--text);}
-.ta-l{font-size:7px;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-top:1px;}
+  .form-input:focus {
+    border-color: var(--fire);
+    box-shadow: 0 0 0 3px rgba(255,69,0,0.15);
+  }
 
-.score-wrap{display:flex;align-items:center;gap:8px;}
-.score-n{
-  font-family:var(--head);font-size:1.1rem;font-weight:900;min-width:32px;
-}
-.score-bar{flex:1;height:5px;background:var(--border2);max-width:150px;}
-.score-fill-bar{height:100%;transition:width 0.5s ease;}
-.score-fill-bar.h{background:linear-gradient(90deg,var(--green2),var(--green));}
-.score-fill-bar.m{background:linear-gradient(90deg,#e65100,var(--gold));}
-.score-fill-bar.l{background:linear-gradient(90deg,#b71c1c,var(--red));}
-.score-sub{font-size:8px;color:var(--text2);}
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
 
-/* Data confidence */
-.confidence{font-size:8px;color:var(--text2);margin-top:5px;}
-.conf-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px;vertical-align:middle;}
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
 
-/* Column: Price */
-.c-price{text-align:right;}
-.price-big{font-family:var(--head);font-size:1.4rem;font-weight:900;color:var(--accent);}
-.price-chg{font-size:10px;margin-top:2px;}
-.price-chg.pos{color:var(--green);}
-.price-chg.neg{color:var(--red);}
-.price-meta{font-size:8px;color:var(--text2);margin-top:4px;line-height:1.8;}
-.target-price{font-size:9px;margin-top:6px;padding:4px 8px;background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);color:var(--green);}
+  .stat-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--gold);
+  }
 
-/* Column: Action */
-.c-act{text-align:center;}
-.rec{
-  display:block;font-family:var(--head);font-size:10px;font-weight:900;
-  padding:6px 8px;letter-spacing:1px;margin-bottom:6px;
-}
-.rec.sb{background:var(--green);color:#000;}
-.rec.b{background:rgba(0,230,118,0.15);color:var(--green);border:1px solid var(--green);}
-.rec.h{background:rgba(255,193,7,0.12);color:var(--gold);border:1px solid var(--gold);}
-.rec.s{background:rgba(255,109,0,0.12);color:var(--orange);border:1px solid var(--orange);}
-.rec.ss{background:var(--red);color:#fff;}
-.rsi-mini{font-size:8px;color:var(--text2);margin-top:3px;}
-.rsi-mini-bar{height:3px;background:var(--border2);margin-top:3px;position:relative;}
-.rsi-mini-fill{position:absolute;top:0;left:0;height:100%;}
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--sub);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
 
-/* No result */
-.empty{padding:24px;text-align:center;font-size:11px;color:var(--text2);border:1px dashed var(--border2);}
-.err-msg{padding:14px 18px;font-size:10px;line-height:1.8;border:1px solid;margin-top:8px;}
-.err-msg.e{background:rgba(255,23,68,0.05);border-color:rgba(255,23,68,0.3);color:#ff5577;}
-.err-msg.w{background:rgba(255,193,7,0.05);border-color:rgba(255,193,7,0.3);color:var(--gold);}
-.err-msg.i{background:rgba(0,212,255,0.04);border-color:rgba(0,212,255,0.2);color:var(--accent);}
+  .btn-start {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--fire), #FF6B00);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255,69,0,0.4);
+  }
 
-.disc{margin-top:24px;padding:14px;border:1px solid var(--border);font-size:9px;color:var(--text2);line-height:1.8;}
+  .btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,69,0,0.6);
+  }
 
-@media(max-width:900px){
-  .card{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;}
-  .c-rank{display:none;}
-  .c-ind{grid-column:1/-1;}
-  .sum.show{grid-template-columns:repeat(4,1fr);}
-  .hdr{grid-template-columns:1fr;}
-}
+  .btn-start:active { transform: translateY(0); }
+
+  .btn-start::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-start:hover::before { left: 100%; }
+
+  .topics-list {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .topics-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--sub);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .topic-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .topic-tag {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sub);
+    letter-spacing: 1px;
+  }
+
+  /* ===== QUIZ SCREEN ===== */
+  #quiz {
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .quiz-header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .quiz-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .quiz-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--fire), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .q-counter {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    color: var(--neon);
+    font-weight: 700;
+  }
+
+  .q-student {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sub);
+  }
+
+  .progress-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--fire), var(--gold));
+    transition: width 0.4s ease;
+    box-shadow: 0 0 10px rgba(255,69,0,0.5);
+  }
+
+  .quiz-body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .q-category {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--fire);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .q-number-badge {
+    display: inline-block;
+    background: var(--fire);
+    color: #fff;
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .q-text {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--fire);
+    background: rgba(255,69,0,0.08);
+    transform: translateX(4px);
+  }
+
+  .option-btn.correct {
+    border-color: var(--neon);
+    background: rgba(0,255,204,0.1);
+    color: var(--neon);
+  }
+
+  .option-btn.wrong {
+    border-color: #FF3366;
+    background: rgba(255,51,102,0.1);
+    color: #FF3366;
+  }
+
+  .option-btn.reveal-correct {
+    border-color: var(--neon);
+    background: rgba(0,255,204,0.05);
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  .opt-letter {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .option-btn.correct .opt-letter { background: var(--neon); color: var(--dark); }
+  .option-btn.wrong .opt-letter { background: #FF3366; color: #fff; }
+
+  .feedback-msg {
+    margin-top: 16px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    display: none;
+  }
+
+  .feedback-msg.correct {
+    background: rgba(0,255,204,0.1);
+    border: 1px solid rgba(0,255,204,0.3);
+    color: var(--neon);
+    display: block;
+  }
+
+  .feedback-msg.wrong {
+    background: rgba(255,51,102,0.1);
+    border: 1px solid rgba(255,51,102,0.3);
+    color: #FF3366;
+    display: block;
+  }
+
+  .quiz-nav {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-next {
+    background: linear-gradient(135deg, var(--fire), #FF6B00);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+    box-shadow: 0 4px 15px rgba(255,69,0,0.3);
+  }
+
+  .btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,69,0,0.5);
+  }
+
+  .score-live {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ===== RESULT SCREEN ===== */
+  #result {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .result-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    animation: fadeUp 0.6s ease;
+  }
+
+  .result-rank-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    display: inline-block;
+  }
+
+  .rank-expert { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.3); }
+  .rank-advanced { background: rgba(0,255,204,0.1); color: var(--neon); border: 1px solid rgba(0,255,204,0.3); }
+  .rank-intermediate { background: rgba(255,165,0,0.1); color: #FFA500; border: 1px solid rgba(255,165,0,0.3); }
+  .rank-beginner { background: rgba(255,51,102,0.1); color: #FF3366; border: 1px solid rgba(255,51,102,0.3); }
+
+  .result-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .result-score-display {
+    font-family: 'Orbitron', monospace;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--fire), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(255,69,0,0.5));
+    margin: 16px 0;
+  }
+
+  .result-score-sub {
+    font-size: 16px;
+    color: var(--sub);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .result-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .break-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 10px;
+  }
+
+  .break-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 900;
+  }
+
+  .break-val.c { color: var(--neon); }
+  .break-val.w { color: #FF3366; }
+  .break-val.p { color: var(--gold); }
+
+  .break-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--sub);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .perf-bar-wrap {
+    background: var(--card);
+    border-radius: 8px;
+    height: 10px;
+    margin-bottom: 32px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .perf-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--fire), var(--gold));
+    border-radius: 8px;
+    transition: width 1.5s ease;
+    box-shadow: 0 0 10px rgba(255,215,0,0.4);
+  }
+
+  .btn-restart {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: 2px solid var(--fire);
+    border-radius: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--fire);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+  }
+
+  .btn-restart:hover {
+    background: var(--fire);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,69,0,0.4);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .q-animate { animation: slideIn 0.3s ease; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .quiz-meta { gap: 10px; }
+    .q-text { font-size: 18px; }
+    .result-score-display { font-size: 56px; }
+    .result-breakdown { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .dashboard-panel { padding: 28px 20px; }
+  }
 </style>
 </head>
 <body>
-<div class="radar-bg"></div>
-<div class="wrap">
 
-<!-- HEADER -->
-<div class="hdr">
-  <div>
-    <div class="hdr-tag">◈ Alpha Hunter Pro — Stockbit Edition</div>
-    <h1>IDX <b>PENNY PROFIT</b> SCANNER</h1>
-    <p class="hdr-sub">
-      Multi-source real data: Yahoo Finance + Stooq + IDX + CNBC Asia.<br>
-      Analisis teknikal 8 indikator + Profit Scoring + Target Price + Link Stockbit langsung.<br>
-      Filter: Harga &lt; Rp 100 · Uptrend Confirmed · Prioritas Profit Tertinggi.
-    </p>
-    <div class="src-pills">
-      <span class="pill y">Yahoo Finance</span>
-      <span class="pill s">Stooq Charts</span>
-      <span class="pill i">IDX Data</span>
-      <span class="pill b">Stockbit Link</span>
-      <span class="pill g">Google Finance</span>
-      <span class="pill f">100% Free</span>
-    </div>
-  </div>
-  <div class="clock-box">
-    <span class="clock-time" id="clk">--:--:--</span>
-    <div class="clock-date" id="clkd">--</div>
-    <div id="mkts" class="mkt-badge closed">● CLOSED</div>
-    <div style="font-size:8px;color:var(--text2);margin-top:5px;" id="session-info">--</div>
-  </div>
-</div>
-
-<!-- CONTROLS -->
-<div class="ctrl">
-  <div class="ctrl-hdr">⚙ Konfigurasi Screening — Target: &lt;Rp100 Uptrend Profit</div>
-
-  <div style="font-size:8px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">WATCHLIST PRESET:</div>
-  <div class="presets">
-    <button class="pre on" onclick="setPreset('penny',this)">🎯 Penny &lt;100</button>
-    <button class="pre" onclick="setPreset('volatile',this)">⚡ High Volatile</button>
-    <button class="pre" onclick="setPreset('energy',this)">⛽ Energi</button>
-    <button class="pre" onclick="setPreset('infra',this)">🏗 Infrastruktur</button>
-    <button class="pre" onclick="setPreset('consumer',this)">🛒 Konsumer</button>
-    <button class="pre" onclick="setPreset('mining',this)">⛏ Pertambangan</button>
-    <button class="pre" onclick="setPreset('finance',this)">🏦 Keuangan</button>
-    <button class="pre" onclick="setPreset('custom',this)">✏ Custom</button>
+<!-- DASHBOARD SCREEN -->
+<div id="dashboard" class="screen active">
+  <div class="logo-area">
+    <div class="logo-tag">⚡ Higher Order Thinking Skills Challenge</div>
+    <div class="logo-title">MOTO<br>QUIZ</div>
+    <div class="logo-sub">Motorcycle Knowledge Test</div>
   </div>
 
-  <div class="fg">
-    <div class="fl">
-      <label>Max Harga (Rp)</label>
-      <input type="number" id="f-price" value="100" min="1">
-    </div>
-    <div class="fl">
-      <label>Min Harga (Rp)</label>
-      <input type="number" id="f-price-min" value="1" min="1">
-    </div>
-    <div class="fl">
-      <label>Min Volume Lot</label>
-      <input type="number" id="f-vol" value="500">
-    </div>
-    <div class="fl">
-      <label>RSI Min (Ideal 40)</label>
-      <input type="number" id="f-rsi-min" value="35" min="0" max="100">
-    </div>
-    <div class="fl">
-      <label>RSI Max (Ideal 65)</label>
-      <input type="number" id="f-rsi-max" value="68" min="0" max="100">
-    </div>
-    <div class="fl">
-      <label>Min Profit Score</label>
-      <input type="number" id="f-score" value="50" min="0" max="100">
-    </div>
-    <div class="fl">
-      <label>Trend Filter</label>
-      <select id="f-trend">
-        <option value="up">Uptrend Only ✅</option>
-        <option value="all">Semua Trend</option>
-        <option value="side">Sideways</option>
-      </select>
-    </div>
-    <div class="fl">
-      <label>Rekomendasi</label>
-      <select id="f-rec">
-        <option value="buy">BUY / STRONG BUY</option>
-        <option value="all">Semua</option>
-        <option value="hold">Hold</option>
-      </select>
-    </div>
-  </div>
+  <div class="dashboard-panel">
+    <div class="panel-header">Student Dashboard</div>
 
-  <div class="fg">
-    <div class="fl fc">
-      <label>Custom Watchlist (pisah koma) — kosongkan untuk pakai preset</label>
-      <input type="text" id="f-custom" placeholder="Contoh: GOTO,BUMI,DEWA,STRK,META,ENRG">
+    <div class="form-group">
+      <label class="form-label">Nama Siswa</label>
+      <input type="text" class="form-input" id="studentName" placeholder="Masukkan nama lengkap Anda..." autocomplete="off">
     </div>
-  </div>
 
-  <button class="btn-go" id="scan-btn" onclick="runScan()">🔍 HUNT ALPHA — SCAN SEKARANG</button>
-</div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-val">100</div>
+        <div class="stat-label">Soal</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">5</div>
+        <div class="stat-label">Pilihan</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">HOTS</div>
+        <div class="stat-label">Level</div>
+      </div>
+    </div>
 
-<!-- PROGRESS -->
-<div class="prog" id="prog">
-  <div class="prog-top">
-    <div class="prog-title">⚡ Multi-Source Scanning</div>
-    <div class="prog-pct"><span id="pd">0</span>/<span id="pt">0</span> — <span id="pp">0</span>%</div>
-  </div>
-  <div class="prog-track"><div class="prog-fill" id="pf"></div></div>
-  <div class="prog-log" id="plog"></div>
-</div>
+    <button class="btn-start" onclick="startQuiz()">🏍️ MULAI QUIZ SEKARANG</button>
 
-<!-- SUMMARY -->
-<div class="sum" id="sum">
-  <div class="si"><span class="v" id="s0">0</span><span class="l">Scanned</span></div>
-  <div class="si"><span class="v g" id="s1">0</span><span class="l">Uptrend 🚀</span></div>
-  <div class="si"><span class="v r" id="s2">0</span><span class="l">Downtrend</span></div>
-  <div class="si"><span class="v y" id="s3">0</span><span class="l">Buy Signal</span></div>
-  <div class="si"><span class="v p" id="s4">0</span><span class="l">Tier S/A</span></div>
-  <div class="si"><span class="v" id="s5">0</span><span class="l">Avg Score</span></div>
-  <div class="si"><span class="v g" id="s6">0</span><span class="l">Avg Target%</span></div>
-</div>
-
-<!-- TOOLBAR -->
-<div class="tb" id="tb">
-  <div class="tb-l">
-    SORT:
-    <button class="tbtn on" onclick="doSort('score',this)">Profit Score</button>
-    <button class="tbtn" onclick="doSort('target',this)">Target%</button>
-    <button class="tbtn" onclick="doSort('price',this)">Harga</button>
-    <button class="tbtn" onclick="doSort('change',this)">% Change</button>
-    <button class="tbtn" onclick="doSort('rsi',this)">RSI</button>
-    <button class="tbtn" onclick="doSort('vol',this)">Volume</button>
-  </div>
-  <div class="tb-r">
-    <input type="text" placeholder="🔍 Cari saham..." oninput="doSearch(this.value)">
+    <div class="topics-list">
+      <div class="topics-title">📚 Topik yang Diuji</div>
+      <div class="topic-tags">
+        <span class="topic-tag">Moped</span>
+        <span class="topic-tag">Minibike</span>
+        <span class="topic-tag">Motorcycle</span>
+        <span class="topic-tag">Wheelbase</span>
+        <span class="topic-tag">Street Legal</span>
+        <span class="topic-tag">Street Bike</span>
+        <span class="topic-tag">Enduro</span>
+        <span class="topic-tag">Dirt Bike</span>
+        <span class="topic-tag">Piston Displacement</span>
+        <span class="topic-tag">Knobby Tires</span>
+        <span class="topic-tag">Trail Bike</span>
+        <span class="topic-tag">Trial Bike</span>
+        <span class="topic-tag">Trike/Tricycle</span>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- RESULTS -->
-<div id="results"></div>
+<!-- QUIZ SCREEN -->
+<div id="quiz" class="screen">
+  <div class="quiz-header">
+    <div class="quiz-meta">
+      <div class="quiz-logo">MOTO QUIZ</div>
+      <div class="q-counter" id="qCounter">Q 1 / 100</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div class="score-live" id="scoreLive">SCORE: 0</div>
+      <div class="q-student" id="qStudentName"></div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar" style="width:1%"></div>
+  </div>
 
-<div class="disc">
-  ⚠ <strong>DISCLAIMER:</strong> Tool ini hanya untuk referensi analisis teknikal dari data publik Yahoo Finance via proxy gratis. Bukan rekomendasi investasi resmi. Data bisa delay 15-20 menit. Selalu verifikasi di Stockbit sebelum trading. Investasi saham mengandung risiko kehilangan modal. DYOR (Do Your Own Research).
+  <div class="quiz-body">
+    <div class="q-category" id="qCategory"></div>
+    <div class="q-number-badge" id="qBadge">SOAL 1</div>
+    <div class="q-text" id="qText"></div>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="feedback-msg" id="feedbackMsg"></div>
+    <div class="quiz-nav">
+      <div class="score-live" style="font-size:12px;color:var(--sub);" id="qNavInfo"></div>
+      <button class="btn-next" id="btnNext" onclick="nextQuestion()">NEXT SOAL →</button>
+    </div>
+  </div>
 </div>
+
+<!-- RESULT SCREEN -->
+<div id="result" class="screen">
+  <div class="result-panel">
+    <div class="result-rank-badge" id="rankBadge"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-score-display" id="resultScore"></div>
+    <div class="result-score-sub" id="resultScoreSub"></div>
+    <div class="perf-bar-wrap">
+      <div class="perf-bar-fill" id="perfBar" style="width:0%"></div>
+    </div>
+    <div class="result-breakdown">
+      <div class="break-box">
+        <div class="break-val c" id="resCorrect">0</div>
+        <div class="break-label">Benar</div>
+      </div>
+      <div class="break-box">
+        <div class="break-val w" id="resWrong">0</div>
+        <div class="break-label">Salah</div>
+      </div>
+      <div class="break-box">
+        <div class="break-val p" id="resPoints">0</div>
+        <div class="break-label">Poin</div>
+      </div>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()">↺ ULANGI QUIZ</button>
+    <button class="btn-restart" onclick="goHome()" style="margin-top:0;border-color:var(--neon);color:var(--neon);">⌂ KEMBALI KE DASHBOARD</button>
+  </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-// PRESETS — Watchlist IDX Penny Stocks
-// ══════════════════════════════════════════════
-const PRESETS = {
-  penny:    ['GOTO','DEWA','BUMI','BIPI','ENRG','WINE','STRK','META','TOSH','BULL','MITI','AWAN','BLTZ','DNAR','BEKS','BHAT','FORU','GAMA','RUNS','SAFE','NASI','LCGP','MABA','BBSS','COAL','WIFI','SICO','MARI','PMMP','SMKL','DNAR','HATM','TPMA','SMIL'],
-  volatile: ['GOTO','BUMI','DEWA','STRK','META','BIPI','ENRG','MITI','AWAN','BLTZ','BULL','RUNS','TOSH','WINE','FORU'],
-  energy:   ['ADRO','BUMI','PTBA','ITMG','ENRG','DEWA','BIPI','MEDC','ELSA','AKRA','HRUM','MYOH','GEMS','KKGI','PSAB'],
-  infra:    ['WIKA','PTPP','WSKT','ADHI','JSMR','TLKM','ISAT','EXCL','TBIG','TOWR','LINK','CENT','FREN','SUPR'],
-  consumer: ['UNVR','ICBP','INDF','MYOR','CLEO','DLTA','ADES','ROTI','SKBM','ULTJ','KEJU','SIDO','KINO','CMRY'],
-  mining:   ['ANTM','PTBA','TINS','INCO','MDKA','AMMN','BUMI','ITMG','MITI','PSAB','CITA','DKFT','SMMT','CKRA'],
-  finance:  ['BBRI','BBCA','BMRI','BBNI','BNGA','BDMN','BNLI','BJTM','BJBR','BTPS','BBYB','AGRO','AMAR','ARTO','BANK'],
-  custom:   []
-};
+const ALL_QUESTIONS = [
+  // === MOPED (8 soal) ===
+  { cat: "Moped", q: "Sebuah kendaraan beroda dua memiliki mesin 49cc dan dilengkapi pedal kayuh. Apa yang membedakannya dari sepeda motor biasa menurut klasifikasi modern?", opts: ["Moped memiliki pedal kayuh sebagai bagian dari desain aslinya dan kapasitas mesin sangat kecil", "Moped tidak memerlukan SIM untuk dikendarai di semua negara", "Moped hanya diproduksi di Eropa dan Asia", "Moped menggunakan tenaga listrik sebagai sumber utama", "Moped tidak dapat mencapai kecepatan lebih dari 20 km/jam"], ans: 0 },
+  { cat: "Moped", q: "Mengapa regulasi di banyak negara membatasi kecepatan maksimal moped hingga 45 km/jam? Apa pertimbangan utama di balik kebijakan ini?", opts: ["Mesin kecil tidak mampu menghasilkan tenaga lebih dari itu secara teknis", "Alasan keselamatan dan klasifikasi pajak kendaraan bermotor ringan", "Produsen moped memang hanya merancang untuk kecepatan rendah", "Jalan perkotaan tidak dirancang untuk kecepatan lebih tinggi", "Karena ban moped tidak cukup kuat untuk kecepatan tinggi"], ans: 1 },
+  { cat: "Moped", q: "Seorang pengguna moped ingin memodifikasi kendaraannya agar bisa mencapai 80 km/jam. Konsekuensi hukum dan teknis apa yang paling mungkin terjadi?", opts: ["Kendaraan akan keluar dari kategori moped dan memerlukan SIM sepeda motor penuh", "Tidak ada konsekuensi selama modifikasi dilakukan oleh bengkel resmi", "Moped yang dimodifikasi otomatis menjadi minibike", "Kecepatan tinggi hanya mempengaruhi konsumsi bahan bakar", "Modifikasi kecepatan tidak dilarang di sebagian besar negara"], ans: 0 },
+  { cat: "Moped", q: "Apa perbedaan mendasar antara moped generasi pertama (1950-an) dengan moped modern dari perspektif teknis propulsi?", opts: ["Moped lama menggunakan karburator sedangkan modern menggunakan injeksi", "Moped lama benar-benar bergantung pada kombinasi pedal dan mesin sedangkan modern lebih dominan mesin", "Moped lama lebih cepat karena rangka lebih ringan", "Moped modern menggunakan transmisi otomatis sedangkan lama manual", "Tidak ada perbedaan signifikan dari segi teknis"], ans: 1 },
+  { cat: "Moped", q: "Dalam konteks keberlanjutan lingkungan, mengapa moped listrik dianggap lebih menguntungkan dibanding moped berbahan bakar konvensional untuk perjalanan kota pendek?", opts: ["Moped listrik lebih mahal sehingga mengurangi jumlah kendaraan di jalan", "Emisi nol operasional, efisiensi energi lebih tinggi, dan kebisingan lebih rendah dalam kondisi penggunaan perkotaan", "Pemerintah memberikan subsidi penuh untuk moped listrik di semua negara", "Baterai moped listrik dapat diisi ulang gratis di SPBU", "Moped listrik tidak memerlukan asuransi kendaraan"], ans: 1 },
+  { cat: "Moped", q: "Bagaimana klasifikasi moped berbeda di Eropa (EU directive) dibanding Amerika Serikat dari segi kapasitas mesin dan kecepatan maksimal?", opts: ["Di EU moped dibatasi 50cc dan 45 km/jam, di AS definisi bervariasi per negara bagian tapi umumnya 50cc dan 30-50 mph", "Di EU tidak ada klasifikasi khusus moped, semua digabung dengan skuter", "Amerika Serikat menggunakan standar EU dalam mengklasifikasikan moped", "Di EU moped boleh hingga 125cc jika dikendarai oleh pengemudi berusia 16 tahun", "Tidak ada perbedaan signifikan antara regulasi EU dan AS untuk moped"], ans: 0 },
+  { cat: "Moped", q: "Mengapa moped dianggap sebagai kendaraan transisi antara sepeda konvensional dan sepeda motor? Analisis berdasarkan karakteristik fisiknya!", opts: ["Karena moped dipasarkan untuk kalangan remaja yang belum boleh naik motor", "Karena moped memiliki elemen mekanis sepeda (pedal/rangka ringan) namun didukung mesin bakar kecil yang memfasilitasi perjalanan tanpa kayuh penuh", "Karena moped lebih murah dari sepeda motor sehingga menjadi pilihan antara", "Karena moped dibuat dari komponen bekas sepeda dan motor", "Karena moped dapat dilipat seperti sepeda"], ans: 1 },
+  { cat: "Moped", q: "Skenario: Di sebuah kota, moped harus melewati jalur sepeda. Pelanggaran apa yang mungkin terjadi dan mengapa regulasi ini diterapkan?", opts: ["Tidak ada pelanggaran karena moped sering disamakan dengan sepeda", "Moped bermesin masuk kategori kendaraan bermotor yang dilarang di jalur sepeda murni untuk melindungi keselamatan pesepeda", "Pelanggaran hanya terjadi jika kecepatan melebihi 10 km/jam", "Moped boleh di jalur sepeda jika mesin dimatikan", "Regulasi jalur sepeda tidak berlaku untuk moped di kebanyakan negara"], ans: 1 },
 
-const SECTOR_MAP = {
-  GOTO:'Teknologi',BUMI:'Batubara',DEWA:'Energi',BIPI:'Minyak & Gas',ENRG:'Energi',
-  WINE:'Konsumer',STRK:'Infrastruktur',META:'Teknologi',TOSH:'Elektronik',
-  BULL:'Keuangan',MITI:'Pertambangan',AWAN:'Teknologi',BLTZ:'Media',
-  DNAR:'Kesehatan',BEKS:'Konstruksi',FORU:'Properti',GAMA:'Properti',
-  RUNS:'Transportasi',SAFE:'Keamanan',ADRO:'Batubara',PTBA:'Batubara',
-  ITMG:'Batubara',HRUM:'Batubara',ANTM:'Pertambangan',INCO:'Pertambangan',
-  TLKM:'Telekomunikasi',BBRI:'Perbankan',BBCA:'Perbankan',BMRI:'Perbankan',
-  BBNI:'Perbankan',PGAS:'Gas',MEDC:'Minyak',ELSA:'Oilfield Services',
-  WIKA:'Konstruksi',PTPP:'Konstruksi',WSKT:'Konstruksi',JSMR:'Tol',
-  UNVR:'FMCG',ICBP:'Makanan',INDF:'Makanan',MYOR:'Makanan',
-};
+  // === MINIBIKE (7 soal) ===
+  { cat: "Minibike", q: "Apa karakteristik utama yang membedakan minibike dari sepeda motor full-size dalam hal geometri dan ergonomi?", opts: ["Minibike menggunakan mesin dua tak sedangkan full-size menggunakan empat tak", "Minibike memiliki wheelbase lebih pendek, kursi lebih rendah, dan dimensi keseluruhan diproporsionalkan untuk pengendara anak atau remaja", "Minibike tidak dapat dikendarai di jalan raya karena tidak memiliki lampu", "Minibike hanya diproduksi oleh pabrikan mainan", "Minibike menggunakan ban khusus yang tidak bisa diganti dengan ban standar"], ans: 1 },
+  { cat: "Minibike", q: "Mengapa minibike sering digunakan sebagai kendaraan latihan balap di sirkuit khusus? Apa keunggulan pedagogisnya?", opts: ["Minibike lebih murah sehingga risiko finansial kerusakan lebih rendah", "Minibike memungkinkan pengendara mempelajari teknik pengereman, cornering, dan throttle control dalam platform yang lebih terkontrol dan aman", "Minibike lebih cepat sehingga pengendara terbiasa dengan kecepatan tinggi", "Minibike tidak memerlukan perlengkapan keselamatan", "Minibike mudah diperbaiki oleh pengendara sendiri"], ans: 1 },
+  { cat: "Minibike", q: "Sebuah minibike dengan kapasitas 110cc digunakan untuk kompetisi motocross kelas mini. Faktor apa yang paling kritis dalam menentukan performanya dibanding minibike 50cc?", opts: ["Warna dan desain grafis minibike lebih berpengaruh pada performa", "Kapasitas mesin yang lebih besar menghasilkan torsi dan tenaga puncak lebih tinggi yang mempengaruhi akselerasi dan kecepatan puncak secara signifikan", "Berat pengendara tidak berpengaruh pada performa minibike", "Merek ban adalah faktor terpenting dalam kompetisi mini", "Perbedaan cc tidak signifikan untuk trek pendek"], ans: 1 },
+  { cat: "Minibike", q: "Dalam analisis risiko keselamatan, mengapa minibike yang dimodifikasi untuk kecepatan tinggi lebih berbahaya dibanding sepeda motor full-size bertenaga sama?", opts: ["Karena minibike tidak memiliki sistem pendingin yang memadai", "Wheelbase pendek membuat minibike lebih tidak stabil pada kecepatan tinggi, dengan distribusi berat yang kurang optimal dan potensi wheelie/endo lebih besar", "Karena ban minibike tidak dapat menahan kecepatan tinggi", "Karena pengendara minibike umumnya belum berpengalaman", "Tidak ada perbedaan risiko yang signifikan"], ans: 1 },
+  { cat: "Minibike", q: "Bagaimana desain suspensi minibike berbeda dari sepeda motor konvensional dan bagaimana perbedaan ini mempengaruhi kenyamanan berkendara?", opts: ["Minibike menggunakan suspensi hidrolik penuh sama seperti motor konvensional", "Minibike sering menggunakan suspensi yang lebih sederhana atau lebih pendek travel-nya, mengakibatkan ride yang lebih keras dan kurang efektif menyerap benturan besar", "Minibike tidak memiliki suspensi sama sekali", "Suspensi minibike lebih canggih dari motor konvensional karena menggunakan teknologi terbaru", "Perbedaan suspensi tidak mempengaruhi kenyamanan berkendara"], ans: 1 },
+  { cat: "Minibike", q: "Mengapa beberapa negara melarang pengoperasian minibike di jalan umum meskipun memiliki mesin yang berfungsi penuh?", opts: ["Karena minibike terlalu lambat untuk mengikuti arus lalu lintas jalan umum", "Karena minibike tidak memenuhi standar keselamatan jalan (lampu, spion, klakson, ukuran ban) dan proporsinya tidak ideal untuk visibilitas di antara kendaraan besar", "Karena produsen minibike tidak mendaftar ke lembaga transportasi", "Karena minibike hanya dijual sebagai mainan", "Karena regulasi bea cukai melarang impor minibike"], ans: 1 },
+  { cat: "Minibike", q: "Bandingkan penggunaan minibike dalam konteks rekreasi keluarga vs. kompetisi balap. Apa perbedaan spesifikasi teknis yang diperlukan untuk masing-masing konteks?", opts: ["Tidak ada perbedaan spesifikasi yang diperlukan untuk kedua konteks", "Minibike rekreasi memprioritaskan keandalan dan kemudahan penggunaan dengan tenaga moderat, sedangkan minibike balap memerlukan mesin dioptimasi, suspensi kompetitif, dan komponen berbobot ringan", "Minibike balap lebih besar dari minibike rekreasi", "Minibike rekreasi menggunakan bahan bakar listrik sedangkan balap menggunakan bensin", "Minibike kompetisi menggunakan rem drum sedangkan rekreasi menggunakan rem cakram"], ans: 1 },
 
-let curWatchlist = [...PRESETS.penny];
-let allData = [];
-let scanning = false;
+  // === MOTORCYCLE GENERAL (8 soal) ===
+  { cat: "Motorcycle", q: "Mengapa desain rangka (frame geometry) sepeda motor sangat menentukan karakteristik handling-nya? Jelaskan hubungan antara rake angle dan stabilitas!", opts: ["Rake angle hanya mempengaruhi tampilan estetika motor, bukan handling", "Rake angle yang lebih besar meningkatkan stabilitas kecepatan tinggi namun mengurangi kelincahan, sedangkan rake kecil membuat motor lebih lincah tapi kurang stabil", "Semakin kecil rake angle, semakin stabil motor pada kecepatan tinggi", "Frame geometry tidak berpengaruh pada handling jika ban yang digunakan berkualitas", "Rake angle hanya penting untuk motor off-road"], ans: 1 },
+  { cat: "Motorcycle", q: "Seorang mekanik menemukan bahwa motor pelanggan mengalami shimmy (getaran berulang di stang) pada kecepatan 100 km/jam. Apa penyebab yang paling mungkin dari analisis dinamika kendaraan?", opts: ["Busi kotor menyebabkan pembakaran tidak sempurna", "Ketidakseimbangan roda, tekanan ban tidak tepat, atau steering head bearing aus yang menyebabkan resonansi frekuensi tertentu", "Masalah pada sistem pengapian elektronik", "Rantai terlalu kencang mengakibatkan getaran", "Oli mesin sudah terlalu lama tidak diganti"], ans: 1 },
+  { cat: "Motorcycle", q: "Mengapa sistem pengereman ABS pada sepeda motor modern dianggap sebagai teknologi keselamatan kritis? Analisis dengan perspektif fisika!", opts: ["ABS membuat pengereman lebih nyaman karena mengurangi getaran tangan", "ABS mencegah penguncian roda yang menyebabkan hilangnya kemampuan steering, memungkinkan pengendara mempertahankan kontrol arah sambil melakukan pengereman maksimal", "ABS hanya efektif di jalan basah dan tidak berguna di jalan kering", "ABS memperpanjang jarak pengereman untuk keamanan", "ABS mengotomatisasi seluruh proses pengereman tanpa input pengendara"], ans: 1 },
+  { cat: "Motorcycle", q: "Bagaimana perubahan posisi riding (riding position) mempengaruhi Center of Gravity (CoG) sepeda motor dan implikasinya pada handling?", opts: ["Posisi riding tidak berpengaruh pada CoG karena berat pengendara konstan", "Posisi pengendara yang lebih tegak meninggikan CoG secara keseluruhan, membuat motor lebih sensitif terhadap perubahan arah, sementara posisi berbaring menurunkan CoG untuk stabilitas kecepatan tinggi", "CoG hanya dipengaruhi oleh posisi mesin, bukan pengendara", "Posisi riding hanya mempengaruhi kenyamanan, tidak berpengaruh pada fisika kendaraan", "Semakin maju posisi duduk, semakin rendah CoG motor"], ans: 1 },
+  { cat: "Motorcycle", q: "Mengapa motor dengan mesin V-twin karakteristiknya berbeda secara signifikan dari motor dengan mesin inline-4 dalam hal torsi dan karakter tenaga?", opts: ["V-twin menggunakan teknologi yang lebih tua sehingga tidak seefisien inline-4", "V-twin menghasilkan torsi besar di putaran rendah dengan karakter pulsasi yang khas, sedangkan inline-4 menghasilkan tenaga puncak lebih tinggi di RPM tinggi dengan karakter lebih halus", "Perbedaan hanya pada suara mesin, tidak ada perbedaan performa nyata", "Inline-4 selalu lebih bertenaga dari V-twin dalam semua kondisi", "V-twin tidak dapat digunakan untuk motor sport karena karakternya kurang cocok"], ans: 1 },
+  { cat: "Motorcycle", q: "Jelaskan mengapa sistem pendingin cairan (liquid cooling) menjadi standar untuk mesin motor berkapasitas besar modern dibanding pendingin udara!", opts: ["Pendingin cairan lebih ringan dari pendingin udara", "Pendingin cairan mampu mempertahankan temperatur operasi optimal lebih konsisten, memungkinkan rasio kompresi lebih tinggi dan output tenaga lebih besar dengan emisi lebih rendah", "Pendingin cairan lebih murah diproduksi sehingga dipilih pabrikan", "Pendingin udara tidak efektif sama sekali untuk mesin apapun", "Regulasi lingkungan melarang penggunaan pendingin udara pada motor baru"], ans: 1 },
+  { cat: "Motorcycle", q: "Apa yang dimaksud dengan 'countersteering' dan mengapa teknik ini kritis untuk berkendara aman pada kecepatan menengah ke atas?", opts: ["Countersteering adalah teknik mengerem sambil berbelok yang dilarang", "Countersteering adalah mendorong handlebar ke arah yang diinginkan untuk berbelok, memanfaatkan fisika gyroscopic roda untuk memulai lean dan tikungan dengan lebih efisien", "Countersteering hanya digunakan oleh pengendara balap profesional", "Countersteering adalah teknik khusus untuk motor bertenaga tinggi saja", "Countersteering tidak diperlukan jika motor memiliki sistem elektronik canggih"], ans: 1 },
+  { cat: "Motorcycle", q: "Dalam kondisi jalan basah, mengapa motor dengan ban wider (lebih lebar) tidak selalu lebih aman dibanding ban narrower? Analisis secara fisika!", opts: ["Ban lebih lebar selalu memberikan grip lebih baik dalam semua kondisi", "Ban lebih sempit dapat menghasilkan tekanan kontak lebih tinggi per satuan luas yang membantu menembus lapisan air (aquaplaning resistance), sementara ban lebar dapat lebih mudah mengapung di atas air", "Lebar ban tidak berpengaruh pada grip di jalan basah", "Ban lebih lebar lebih berat sehingga lebih berbahaya di jalan basah", "Jenis ban basah/kering lebih penting dari lebar ban dalam semua situasi"], ans: 1 },
 
-// ══════════════════════════════════════════════
-// CLOCK & MARKET STATUS
-// ══════════════════════════════════════════════
-function tick(){
-  const now = new Date();
-  const wib = new Date(now.toLocaleString('en-US',{timeZone:'Asia/Jakarta'}));
-  document.getElementById('clk').textContent = wib.toTimeString().slice(0,8);
-  document.getElementById('clkd').textContent = wib.toLocaleDateString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  // === WHEELBASE (7 soal) ===
+  { cat: "Wheelbase", q: "Bagaimana panjang wheelbase secara langsung mempengaruhi karakteristik manuverabilitas dan stabilitas sepeda motor?", opts: ["Wheelbase yang lebih panjang selalu lebih baik untuk semua jenis penggunaan", "Wheelbase panjang meningkatkan stabilitas lurus (straight-line stability) namun mengurangi kelincahan berbelok, sementara wheelbase pendek lebih lincah namun kurang stabil pada kecepatan tinggi", "Wheelbase hanya mempengaruhi kapasitas tangki bahan bakar", "Wheelbase tidak berpengaruh pada handling jika suspensi dikalibrasi dengan benar", "Wheelbase panjang hanya penting untuk motor touring, tidak untuk motor lain"], ans: 1 },
+  { cat: "Wheelbase", q: "Mengapa motor drag racing menggunakan wheelbase yang sangat panjang dibanding motor road racing? Analisis gaya fisika yang terlibat!", opts: ["Motor drag racing memerlukan ruang lebih untuk menempatkan mesin besar", "Wheelbase panjang pada drag racing mencegah front-end lift (wheelie) akibat akselerasi ekstrem, mendistribusikan beban lebih merata dan mempertahankan traksi roda belakang", "Regulasi drag racing mewajibkan wheelbase minimum tertentu", "Wheelbase panjang memudahkan pengendara mempertahankan keseimbangan saat berakselerasi", "Motor drag racing menggunakan wheelbase panjang untuk tampilan visual saja"], ans: 1 },
+  { cat: "Wheelbase", q: "Seorang insinyur motor sedang merancang sportbike baru. Jika wheelbase diperpendek 20mm, prediksi apa perubahan karakter handling yang akan terjadi?", opts: ["Motor akan menjadi lebih stabil pada kecepatan tinggi", "Motor akan menjadi lebih responsif dalam perubahan arah (quick steering) namun mungkin sedikit kurang stabil pada kecepatan sangat tinggi, memerlukan penyesuaian geometri lain", "Tidak ada perubahan signifikan karena 20mm terlalu kecil untuk dirasakan", "Motor akan mengalami understeer yang lebih signifikan", "Wheelbase lebih pendek otomatis membuat motor lebih berat"], ans: 1 },
+  { cat: "Wheelbase", q: "Mengapa motor adventure/ADV touring umumnya memiliki wheelbase yang lebih panjang dari motor sport? Pertimbangkan faktor penggunaan di berbagai medan!", opts: ["Motor ADV memiliki mesin lebih besar yang memerlukan rangka lebih panjang", "Wheelbase panjang pada ADV memberikan stabilitas yang dibutuhkan saat membawa beban touring di kecepatan highway, serta membantu melewati medan tidak rata dengan penyerapan kejutan lebih baik", "Regulasi mensyaratkan wheelbase minimum untuk motor berkapasitas besar", "Motor ADV lebih mahal sehingga pabrikan menambah panjang untuk nilai jual", "Wheelbase panjang pada ADV adalah konvensi desain tanpa alasan teknis khusus"], ans: 1 },
+  { cat: "Wheelbase", q: "Bagaimana swingarm length (panjang lengan ayun) berhubungan dengan wheelbase dan mengapa perubahannya mempengaruhi anti-squat karakteristik motor?", opts: ["Swingarm length tidak berhubungan langsung dengan wheelbase", "Swingarm lebih panjang meningkatkan wheelbase sekaligus mempengaruhi sudut chain pull dan gaya anti-squat, mempengaruhi bagaimana motor bereaksi terhadap akselerasi", "Anti-squat hanya dipengaruhi oleh setting suspensi belakang, bukan panjang swingarm", "Swingarm lebih pendek selalu lebih baik untuk performa balap", "Hubungan swingarm dan wheelbase tidak relevan untuk motor jalan raya"], ans: 1 },
+  { cat: "Wheelbase", q: "Dalam konteks desain chopper/cruiser, mengapa para builder memilih wheelbase yang sangat panjang meski secara teknis mengurangi manuverabilitas?", opts: ["Chopper memerlukan wheelbase panjang untuk menampung mesin V-twin yang besar", "Wheelbase panjang pada chopper menghasilkan stance visual dramatis yang merupakan identitas estetika genre ini, disertai riding character yang lebih rileks dan lurus sesuai filosofi cruising", "Regulasi khusus chopper mensyaratkan wheelbase minimum", "Chopper dengan wheelbase panjang lebih aman di jalan raya", "Wheelbase panjang pada chopper adalah untuk mengakomodasi penumpang"], ans: 1 },
+  { cat: "Wheelbase", q: "Analisis bagaimana perbedaan wheelbase antara Yamaha R1 (road race) dan Honda CRF450R (motocross) mencerminkan filosofi desain yang berbeda untuk kebutuhan performa yang berbeda!", opts: ["Perbedaan wheelbase hanya mencerminkan perbedaan ukuran mesin yang digunakan", "R1 menggunakan wheelbase lebih panjang untuk stabilitas kecepatan tinggi di sirkuit mulus, sementara CRF450R lebih pendek untuk manuverabilitas cepat di trek yang berubah-ubah dengan obstacle", "Tidak ada perbedaan filosofis, keduanya mengoptimalkan wheelbase yang sama", "CRF450R memiliki wheelbase lebih panjang karena medan off-road memerlukan stabilitas", "Wheelbase R1 lebih pendek karena motor sport modern memprioritaskan kelincahan"], ans: 1 },
 
-  const h=wib.getHours(), m=wib.getMinutes(), d=wib.getDay();
-  const wd=d>=1&&d<=5;
-  const inPre = wd && h===8 && m>=55;
-  const inSesi1 = wd && ((h===9)||(h>=10&&h<11)||(h===11&&m<30));
-  const inIstirahat = wd && ((h===11&&m>=30)||(h===12)||(h===13&&m<0));
-  const inSesi2 = wd && ((h>=13&&h<15)||(h===15&&m<50));
-  const isOpen = inSesi1||inSesi2;
+  // === STREET LEGAL MOTORCYCLE (8 soal) ===
+  { cat: "Street Legal Motorcycle", q: "Sebuah motor kustom ingin didaftarkan sebagai kendaraan street legal. Komponen wajib apa yang harus dipastikan ada berdasarkan regulasi keselamatan jalan umum?", opts: ["Hanya perlu mesin yang berfungsi dan sistem rem", "Motor harus memiliki sistem pencahayaan lengkap (depan, belakang, sein), spion kiri-kanan, klakson, speedometer, ban berspecifikasi jalan, dan memenuhi standar emisi yang berlaku", "Hanya lampu depan dan belakang yang wajib", "Motor perlu mendapat persetujuan dari pabrikan asal untuk jalan raya", "Tidak ada persyaratan khusus selama motor bisa berjalan dengan baik"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Mengapa proses sertifikasi street legal berbeda antara satu negara dengan negara lain? Apa implikasinya bagi importasi sepeda motor?", opts: ["Karena setiap negara memiliki produsen motor lokal yang ingin dilindungi", "Karena standar keselamatan, emisi, dan teknis jalan berbeda antar yurisdiksi hukum, sehingga motor yang legal di satu negara mungkin perlu modifikasi untuk memenuhi regulasi negara lain", "Perbedaan hanya pada prosedur administratif, bukan persyaratan teknis", "Karena bahasa regulasi berbeda sehingga sulit distandarisasi", "Sertifikasi street legal sudah distandarisasi secara internasional sejak 2010"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Sebuah motor off-road (dirt bike) ingin dikonversi menjadi street legal. Apa tantangan teknis utama yang harus diatasi dalam proses konversi ini?", opts: ["Mengganti warna motor agar sesuai regulasi jalan raya", "Menambahkan sistem pencahayaan, spion, klakson, mengubah ban ke profil jalan, memasang speedometer, sistem kelistrikan 12V, dan mungkin memodifikasi sistem emisi/exhaust", "Hanya perlu mendaftarkan motor ke kantor transportasi", "Menambahkan mudguard yang lebih panjang untuk penggunaan jalan basah", "Mengubah sistem transmisi dari clutch manual ke semi-otomatis"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Mengapa standar emisi (seperti Euro 5 di Eropa) sangat mempengaruhi desain mesin motor street legal modern?", opts: ["Standar emisi hanya mempengaruhi sistem knalpot, bukan desain mesin", "Standar emisi ketat mendorong adopsi injeksi bahan bakar presisi, sistem katalis, desain ruang bakar optimal, dan manajemen mesin elektronik untuk meminimalkan HC, CO, dan NOx", "Motor dengan standar emisi tinggi otomatis lebih bertenaga", "Standar emisi hanya berlaku untuk kendaraan roda empat ke atas", "Euro 5 hanya mempengaruhi aspek pajak kendaraan bermotor"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Apa perbedaan antara 'type approval' dan 'individual vehicle approval' dalam konteks street legal motorcycle di Eropa?", opts: ["Keduanya adalah proses yang sama dengan nama berbeda", "Type approval adalah sertifikasi massal oleh pabrikan untuk model tertentu, sementara individual vehicle approval adalah proses untuk kendaraan tunggal yang dimodifikasi atau diimpor yang tidak memiliki type approval massal", "Individual vehicle approval lebih mudah dan murah dari type approval", "Type approval hanya untuk motor sport sedangkan individual untuk motor cruiser", "Tidak ada perbedaan regulasi antara keduanya di Eropa"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Analisis mengapa motor dengan mesin 2-tak semakin sulit mendapatkan sertifikasi street legal di banyak negara berkembang!", opts: ["Motor 2-tak tidak populer lagi sehingga pabrikan berhenti memproduksinya", "Emisi motor 2-tak (HC tinggi akibat blow-through gas segar) sulit memenuhi standar lingkungan modern tanpa pengembangan teknologi mahal yang tidak kompetitif biaya dibanding 4-tak", "Motor 2-tak terlalu berisik untuk standar kebisingan urban", "Regulasi hanya menarget motor 2-tak untuk melindungi pabrikan motor 4-tak", "Motor 2-tak tidak dapat dilengkapi sistem ABS sehingga gagal uji keselamatan"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Mengapa persyaratan sistem pencahayaan (seperti DRL/Daytime Running Light) semakin menjadi standar wajib pada motor street legal modern?", opts: ["DRL adalah fitur mewah yang ditambahkan untuk meningkatkan nilai jual", "Penelitian keselamatan menunjukkan DRL meningkatkan visibilitas motor terhadap pengemudi kendaraan lain secara signifikan, mengurangi kecelakaan yang disebabkan failure to see", "DRL wajib karena baterai motor modern memiliki kapasitas berlebih", "Regulasi DRL diberlakukan untuk mengurangi konsumsi lampu tradisional", "DRL hanya wajib untuk motor berkapasitas di atas 600cc"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Seorang turis membawa motor street legal dari negara asalnya ke negara lain. Dokumen dan kondisi teknis apa yang perlu diverifikasi?", opts: ["Hanya perlu membawa SIM internasional, tidak perlu verifikasi teknis", "Perlu memastikan SIM internasional berlaku, STNK/registrasi kendaraan, asuransi yang berlaku di negara tujuan, dan memverifikasi apakah spesifikasi teknis motor sesuai regulasi negara tujuan", "Motor street legal otomatis diizinkan di semua negara tanpa verifikasi tambahan", "Hanya negara-negara tertentu yang memeriksa dokumen motor turis", "Cukup membawa foto STNK dari negara asal"], ans: 1 },
 
-  const el=document.getElementById('mkts');
-  const si=document.getElementById('session-info');
-  if(inPre){el.textContent='◎ PRE-MARKET';el.className='mkt-badge open';si.textContent='Sesi Pre-Opening (08:55)';}
-  else if(inSesi1){el.textContent='● MARKET OPEN';el.className='mkt-badge open';si.textContent='Sesi I: 09:00–11:30';}
-  else if(inIstirahat){el.textContent='◌ ISTIRAHAT';el.className='mkt-badge closed';si.textContent='Sesi Istirahat: 11:30–13:30';}
-  else if(inSesi2){el.textContent='● MARKET OPEN';el.className='mkt-badge open';si.textContent='Sesi II: 13:30–15:49';}
-  else{el.textContent='● CLOSED';el.className='mkt-badge closed';si.textContent=wd?'After Hours':'Weekend — Market Tutup';}
-}
-setInterval(tick,1000); tick();
+  // === STREET BIKE (6 soal) ===
+  { cat: "Street Bike", q: "Bagaimana street bike berbeda dari sport bike dalam hal filosofi desain ergonomi dan tujuan penggunaan utamanya?", opts: ["Street bike dan sport bike adalah istilah yang identik dan dapat digunakan bergantian", "Street bike diprioritaskan untuk kenyamanan commuting dan versatilitas harian dengan posisi berkendara lebih upright, sedangkan sport bike mengoptimalkan performa sirkuit dengan posisi agresif yang mengorbankan kenyamanan jangka panjang", "Street bike selalu lebih bertenaga dari sport bike", "Sport bike adalah subkategori street bike yang memiliki lampu tambahan", "Street bike hanya tersedia dalam kapasitas mesin di bawah 400cc"], ans: 1 },
+  { cat: "Street Bike", q: "Mengapa nakeds/streetfighter (subkategori street bike) menjadi sangat populer di kalangan urban rider? Analisis faktor praktis dan psikologis!", opts: ["Karena naked bike lebih murah dari sport bike sehingga terjangkau lebih banyak orang", "Naked/streetfighter menawarkan posisi berkendara upright yang lebih nyaman untuk kondisi perkotaan, visibilitas lebih baik, kemudahan parkir dengan dimensi kompak, plus estetika agresif yang menarik secara psikologis", "Naked bike populer karena tidak memerlukan perawatan fairings", "Naked bike lebih cepat dari sport bike karena bobot lebih ringan", "Popularitas naked bike didorong oleh regulasi yang melarang fairings di kota"], ans: 1 },
+  { cat: "Street Bike", q: "Apa trade-off antara street bike bergearbox manual vs. matik (DCT/automatic) untuk penggunaan urban sehari-hari?", opts: ["Matik selalu lebih baik dari manual untuk semua kondisi berkendara", "Manual menawarkan keterlibatan pengendara lebih penuh dan efisiensi yang bisa dioptimalkan, sementara DCT/automatic mengurangi kelelahan di kemacetan dan learning curve untuk pemula", "Motor matik tidak tersedia dalam kapasitas di atas 300cc", "Tidak ada perbedaan praktis antara manual dan matik untuk penggunaan urban", "Motor DCT hanya cocok untuk perjalanan jarak jauh, tidak untuk urban"], ans: 1 },
+  { cat: "Street Bike", q: "Mengapa street bike modern semakin banyak dilengkapi dengan riding mode (rain, urban, sport)? Jelaskan mekanisme yang disesuaikan dalam setiap mode!", opts: ["Riding mode hanya mengubah tampilan dashboard dan tidak mempengaruhi performa nyata", "Riding mode menyesuaikan peta injeksi (power delivery curve), respons throttle, sensitivitas traction control, dan kadang pengaturan suspensi untuk mengoptimalkan performa sesuai kondisi jalan dan gaya berkendara", "Riding mode mengubah kapasitas tangki bahan bakar yang digunakan", "Hanya mode sport yang benar-benar mempengaruhi performa, mode lain hanya kosmetik", "Riding mode adalah fitur keselamatan wajib yang diatur oleh regulasi internasional"], ans: 1 },
+  { cat: "Street Bike", q: "Bagaimana pemilihan rasio gear final drive (sprocket ratio) pada street bike mempengaruhi trade-off antara akselerasi dan kecepatan puncak?", opts: ["Sprocket ratio tidak berpengaruh pada kecepatan puncak, hanya pada torsi di roda", "Sprocket belakang lebih besar (lower gearing) meningkatkan akselerasi namun menurunkan kecepatan puncak dan meningkatkan RPM pada kecepatan cruise, sementara sprocket lebih kecil membalikkan trade-off tersebut", "Rasio sprocket standar pabrikan selalu optimal dan tidak perlu diubah", "Final drive ratio hanya mempengaruhi konsumsi bahan bakar", "Sprocket lebih besar di belakang selalu meningkatkan kecepatan puncak"], ans: 1 },
+  { cat: "Street Bike", q: "Analisis mengapa berat total (wet weight) street bike sangat mempengaruhi pengalaman berkendara harian dibanding rating tenaga (horsepower)!", opts: ["Horsepower adalah faktor paling penting dan berat tidak relevan untuk street use", "Power-to-weight ratio adalah yang sesungguhnya menentukan performa nyata; motor lebih ringan dengan horsepower sedang sering lebih menyenangkan dikendarai harian dibanding motor berat bertenaga besar yang terasa berat di kemacetan dan manuver lambat", "Berat hanya mempengaruhi konsumsi bahan bakar, bukan pengalaman berkendara", "Street bike modern sudah cukup bertenaga sehingga berat tidak relevan", "Berat ideal street bike adalah di atas 200kg untuk stabilitas"], ans: 1 },
 
-// ══════════════════════════════════════════════
-// PRESET
-// ══════════════════════════════════════════════
-function setPreset(name,btn){
-  document.querySelectorAll('.pre').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  const ci=document.getElementById('f-custom');
-  if(name==='custom'){ci.focus();return;}
-  ci.value='';
-  curWatchlist=[...PRESETS[name]];
-  if(['penny','volatile'].includes(name)){
-    document.getElementById('f-price').value=100;
-    document.getElementById('f-price-min').value=1;
-  } else {
-    document.getElementById('f-price').value=9999;
-    document.getElementById('f-price-min').value=1;
-  }
-}
+  // === ENDURO MOTORCYCLE (8 soal) ===
+  { cat: "Enduro Motorcycle", q: "Apa yang membedakan enduro motorcycle dari trail bike dan dirt bike dalam konteks penggunaan dan spesifikasi teknis?", opts: ["Enduro, trail bike, dan dirt bike adalah istilah yang benar-benar sama", "Enduro dirancang untuk balapan jarak jauh di medan campuran dengan navigasi, memerlukan tangki besar, penerangan untuk malam, dan ketahanan yang lebih baik dari dirt bike pure motocross; sedangkan trail bike lebih untuk rekreasi leisure di jalur alam", "Enduro hanya untuk kompetisi off-road profesional dan tidak boleh digunakan rekreasi", "Dirt bike lebih tangguh dari enduro karena khusus untuk medan ekstrem", "Enduro menggunakan mesin 2-tak sementara trail bike menggunakan 4-tak"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Mengapa enduro racing memerlukan strategi manajemen bahan bakar yang sangat berbeda dari motocross racing?", opts: ["Karena enduro menggunakan bahan bakar premium sedangkan motocross menggunakan bensin biasa", "Enduro menempuh jarak jauh (bisa ratusan kilometer) dengan pengisian terbatas, sehingga pengendara harus menyeimbangkan kecepatan dengan konsumsi bahan bakar dan merencanakan rute dengan cermat", "Manajemen bahan bakar enduro sama dengan motocross karena keduanya off-road", "Enduro menggunakan tangki yang dapat diisi saat berkendara", "Strategi bahan bakar tidak penting dalam kompetisi enduro modern"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Bagaimana desain suspensi enduro motorcycle dioptimalkan untuk menangani berbagai jenis terrain berbeda dalam satu balapan?", opts: ["Suspensi enduro menggunakan setting kaku untuk semua medan", "Enduro bike menggunakan suspensi dengan travel panjang (biasanya 250-300mm), tuned untuk balance antara absorbed berbagai permukaan kasar, responsif di rocky sections, sambil cukup stabil untuk high-speed desert/grass sections", "Suspensi enduro identik dengan motocross karena keduanya off-road", "Enduro menggunakan suspensi adjustable elektrik yang berubah otomatis", "Travel suspensi enduro lebih pendek dari motocross untuk stabilitas"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Dalam kompetisi enduro, mengapa manajemen fisik pengendara sama pentingnya dengan performa mesin? Analisis tuntutan fisiologis enduro racing!", opts: ["Karena enduro berlangsung selama beberapa jam hingga hari, tuntutan fisik (kekuatan, endurance, konsentrasi) sangat tinggi dan kelelahan dapat menyebabkan kesalahan fatal atau penurunan performa signifikan", "Fisik pengendara tidak penting karena motor yang menentukan hasil", "Enduro adalah balapan lambat sehingga tidak terlalu menuntut fisik", "Manajemen fisik hanya penting untuk enduro pemula, bukan profesional", "Tuntutan fisik enduro lebih rendah dari motocross karena tidak ada jumps besar"], ans: 0 },
+  { cat: "Enduro Motorcycle", q: "Mengapa hard enduro (seperti Erzbergrodeo) dianggap sebagai salah satu kompetisi motorsport paling demanding di dunia?", opts: ["Karena hard enduro menggunakan motor paling bertenaga dalam motorsport", "Hard enduro menggabungkan medan ekstrem (batu terjal, sudut curam, lumpur dalam) dengan durasi kompetisi panjang dan zone teknis yang memerlukan kombinasi skill teknis luar biasa, kekuatan fisik, dan ketahanan mental", "Hard enduro demanding karena tidak ada batasan kelas umur peserta", "Karena hard enduro diadakan di cuaca ekstrem selalu", "Hard enduro dianggap demanding hanya karena biaya partisipasinya yang tinggi"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Bagaimana teknologi GPS dan elektronik modern telah mengubah strategi navigasi dalam enduro racing dibanding era peta kertas?", opts: ["GPS belum diizinkan dalam kompetisi enduro resmi", "GPS memungkinkan navigasi real-time lebih akurat, mengurangi kesalahan rute yang dulu menghabiskan waktu signifikan; namun beberapa format balap masih membatasi GPS untuk menjaga elemen navigasi sebagai skills yang diuji", "GPS tidak berguna di medan off-road yang sinyalnya lemah", "GPS hanya digunakan untuk keselamatan darurat, bukan strategi", "Teknologi GPS membuat enduro terlalu mudah sehingga tidak lagi kompetitif"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Apa peran 'special tests' dalam format enduro modern dan bagaimana hal ini membedakan enduro dari pure cross-country racing?", opts: ["Special tests adalah segmen waktu terukur di medan khusus yang diselingi antara transfer sections, memaksa pengendara menyeimbangkan kemampuan navigasi dan pace dengan performa maksimal di segmen timed", "Special tests adalah pengujian teknis mesin sebelum balapan dimulai", "Enduro modern tidak menggunakan special tests lagi", "Special tests hanya ada di level amatir, tidak di kompetisi profesional", "Special tests adalah bagian dari trek transfer biasa"], ans: 0 },
+  { cat: "Enduro Motorcycle", q: "Mengapa enduro bike umumnya lebih berat dari pure motocross bike? Apa trade-off yang diterima pengendara enduro?", opts: ["Enduro bike lebih berat karena mesinnya lebih besar", "Enduro bike membawa komponen tambahan untuk street legality atau durability (tangki lebih besar, sistem kelistrikan lengkap, build quality lebih robust), trade-off-nya adalah handling sedikit kurang agresif dibanding MX pure di terrain motocross", "Berat enduro dan motocross sebenarnya identik", "Enduro lebih ringan dari motocross karena desain yang lebih efisien", "Perbedaan berat hanya dalam range 1-2 kg dan tidak berpengaruh"], ans: 1 },
 
-// ══════════════════════════════════════════════
-// CORS PROXIES — rotasi otomatis
-// ══════════════════════════════════════════════
-const PROXIES = [
-  u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  u=>`https://corsproxy.io/?${encodeURIComponent(u)}`,
-  u=>`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
-  u=>`https://thingproxy.freeboard.io/fetch/${u}`,
+  // === DIRT BIKE (7 soal) ===
+  { cat: "Dirt Bike", q: "Apa karakteristik teknis yang membuat dirt bike tidak cocok untuk penggunaan jalan raya tanpa modifikasi signifikan?", opts: ["Dirt bike terlalu cepat untuk digunakan di jalan raya", "Dirt bike tidak dilengkapi sistem pencahayaan, speedometer, ban profil jalan, dan sistem kelistrikan yang memadai; suspensi dioptimalkan untuk off-road bukan aspal; knobby tire berbahaya di jalan keras basah", "Dirt bike tidak memiliki rem yang cukup untuk kecepatan jalan raya", "Dirt bike tidak memiliki kursi yang nyaman untuk perjalanan panjang", "Dirt bike terlalu berisik untuk regulasi jalan umum"], ans: 1 },
+  { cat: "Dirt Bike", q: "Bandingkan karakteristik mesin 2-tak vs 4-tak pada dirt bike motocross modern. Mengapa 4-tak kini mendominasi kelas premier MX?", opts: ["4-tak mendominasi karena lebih murah diproduksi", "4-tak modern menghasilkan karakteristik tenaga lebih linear dan mudah dikontrol, torsi lebih besar di range RPM lebar, dan keandalan lebih baik; regulasi juga menyamakan lapangan (4-tak 450cc vs 2-tak 250cc) yang membuat 4-tak lebih kompetitif", "2-tak masih mendominasi tetapi pabrikan memilih 4-tak karena alasan marketing", "4-tak memiliki power lebih besar di semua kategori sehingga pilihan logis", "Regulasi melarang 2-tak di semua kategori MX sehingga 4-tak terpaksa digunakan"], ans: 1 },
+  { cat: "Dirt Bike", q: "Mengapa teknik 'body positioning' (posisi tubuh) sangat kritis dalam dirt bike riding? Jelaskan bagaimana posisi tubuh mempengaruhi traksi dan kontrol!", opts: ["Body positioning hanya penting untuk kesan profesional saat berkendara", "Memindahkan berat badan pengendara mempengaruhi distribusi traksi; berdiri di footpeg menurunkan CoG dan mengisolasi tubuh dari benturan; condong ke depan di tanjakan mempertahankan traksi roda depan; bergeser ke belakang di turunan mencegah over-the-bar", "Body positioning hanya mempengaruhi kenyamanan pengendara", "Di dirt bike, posisi duduk lebih efisien dari posisi berdiri dalam segala kondisi", "Body positioning tidak berpengaruh jika suspensi motor dikalibrasi dengan benar"], ans: 1 },
+  { cat: "Dirt Bike", q: "Mengapa pemerintah di banyak negara melarang pengoperasian dirt bike di area publik umum (taman, jalan perumahan)? Analisis berbagai pertimbangan yang terlibat!", opts: ["Karena dirt bike dianggap mainan anak-anak yang berbahaya", "Dirt bike yang tidak street legal beroperasi di area publik menimbulkan risiko keselamatan (tidak ada pencahayaan/sein), polusi suara yang signifikan, kerusakan lahan/vegetasi, dan potensi konflik dengan pengguna ruang publik lainnya", "Larangan tersebut hanya untuk melindungi produsen sirkuit off-road", "Dirt bike dilarang hanya di hari-hari tertentu untuk mengurangi kebisingan", "Larangan hanya berlaku untuk dirt bike berkapasitas di atas 250cc"], ans: 1 },
+  { cat: "Dirt Bike", q: "Bagaimana sistem suspensi 'linkage' (Pro-Link, Uni-Trak, dll.) pada dirt bike berbeda dari suspensi langsung dan apa keunggulannya?", opts: ["Suspensi linkage lebih sederhana dan lebih murah dari suspensi langsung", "Sistem linkage menggunakan rocker arm dan link untuk menciptakan progression ratio - suspensi semakin kaku seiring compression stroke, memberikan handling lebih baik di small bumps dengan perlindungan bottom-out di big hits", "Linkage dan suspensi langsung menghasilkan performa yang sama persis", "Suspensi linkage hanya digunakan pada dirt bike premium karena biaya", "Suspensi langsung lebih canggih dari linkage untuk off-road"], ans: 1 },
+  { cat: "Dirt Bike", q: "Analisis mengapa dirt bike modern semakin mengadopsi teknologi elektronik (traction control, map selection) meski olahraga ini dikenal sebagai 'pure mechanical skill'!", opts: ["Elektronik pada dirt bike adalah tren marketing yang tidak berpengaruh nyata", "Elektronik modern membantu pengendara mengoptimalkan traksi di berbagai kondisi permukaan secara real-time lebih cepat dari reaksi manusia; namun dibatasi untuk tidak menghilangkan elemen skill manusia yang menjadi esensi olahraga", "Dirt bike modern menggunakan elektronik penuh yang mengotomatisasi segalanya", "Elektronik dilarang dalam kompetisi dirt bike resmi", "Teknologi elektronik dirt bike identik dengan yang digunakan di road race"], ans: 1 },
+  { cat: "Dirt Bike", q: "Apa yang dimaksud dengan 'setup' dirt bike dan mengapa pengendara profesional menghabiskan banyak waktu untuk menyesuaikannya sebelum kompetisi?", opts: ["Setup adalah proses membersihkan dan mengecat ulang motor sebelum kompetisi", "Setup mencakup penyesuaian suspensi (preload, compression, rebound damping), tekanan ban, gearing, posisi handle, dan power delivery sesuai karakteristik trek spesifik dan gaya berkendara pengendara untuk memaksimalkan performa", "Setup adalah prosedur standar yang sama untuk semua pengendara di semua trek", "Hanya suspensi yang perlu di-setup, komponen lain sudah optimal dari pabrikan", "Setup hanya penting untuk motocross, tidak relevan untuk enduro atau trail"], ans: 1 },
+
+  // === PISTON DISPLACEMENT (8 soal) ===
+  { cat: "Piston Displacement", q: "Mengapa volume langkah piston (displacement) dinyatakan dalam cc (cubic centimeter) dan apa hubungannya dengan potensi tenaga mesin?", opts: ["cc hanya digunakan sebagai standar pemasaran, tidak berhubungan dengan tenaga", "Displacement mengukur volume total yang disapu piston dalam satu siklus; volume lebih besar memungkinkan campuran bahan bakar-udara lebih banyak masuk, menghasilkan pembakaran lebih besar dan potensi tenaga lebih tinggi", "Displacement diukur dalam cc karena mesin kecil tidak bisa diukur dalam liter", "cc yang lebih tinggi otomatis berarti konsumsi bahan bakar yang lebih efisien", "Displacement hanya relevan untuk mesin 2-tak, tidak untuk 4-tak"], ans: 1 },
+  { cat: "Piston Displacement", q: "Sebuah mesin motor memiliki 4 silinder dengan bore 67mm dan stroke 42.5mm. Hitung approximate total displacement dan klasifikasikan sesuai kelas racing!", opts: ["Total displacement sekitar 400cc, masuk kelas 400cc production", "Total displacement = π/4 × 67² × 42.5 × 4 ≈ 598cc, masuk kelas supersport 600cc", "Total displacement sekitar 500cc, masuk kelas middleweight", "Total displacement sekitar 750cc, masuk kelas superbike", "Tidak bisa dihitung tanpa mengetahui jumlah katup per silinder"], ans: 1 },
+  { cat: "Piston Displacement", q: "Mengapa mesin dengan displacement sama namun bore/stroke ratio berbeda (over-square vs under-square/long-stroke) menghasilkan karakter tenaga yang sangat berbeda?", opts: ["Bore/stroke ratio tidak mempengaruhi karakter tenaga, hanya displacement total yang penting", "Over-square (bore besar/stroke pendek) memungkinkan RPM lebih tinggi dan tenaga puncak lebih besar; under-square (stroke panjang) menghasilkan torsi lebih besar di RPM rendah dengan karakter lebih smooth", "Under-square selalu lebih bertenaga dari over-square dalam semua kondisi", "Bore/stroke ratio hanya mempengaruhi ukuran fisik mesin, bukan karakter tenaga", "Over-square lebih efisien bahan bakar sedangkan under-square lebih bertenaga"], ans: 1 },
+  { cat: "Piston Displacement", q: "Bagaimana supercharging/turbocharging memungkinkan mesin kecil menghasilkan tenaga setara mesin naturally aspirated yang jauh lebih besar?", opts: ["Forced induction tidak benar-benar meningkatkan tenaga, hanya efisiensi", "Turbo/supercharger memaksa lebih banyak udara masuk silinder dibanding yang bisa dihisap secara natural, memungkinkan pembakaran campuran lebih kaya dan denser, efektif 'membesarkan' displacement fungsional mesin", "Forced induction hanya meningkatkan torsi, bukan tenaga puncak", "Supercharger dan turbo hanya digunakan pada mesin diesel, bukan bensin", "Tenaga tidak bisa melebihi displacement alami; forced induction adalah mitos"], ans: 1 },
+  { cat: "Piston Displacement", q: "Mengapa kelas balap motor menggunakan pembatasan displacement (bukan bobot atau tenaga langsung) sebagai parameter utama regulasi kompetisi?", opts: ["Karena displacement mudah diukur dan diverifikasi secara fisik, lebih sulit dimanipulasi dibanding tenaga, dan memberikan kerangka teknis yang relatif setara antar pabrikan dalam pengembangan mesin", "Karena displacement adalah satu-satunya parameter teknis yang bisa diukur", "Karena regulasi displacement lebih menguntungkan pabrikan besar", "Pembatasan displacement sudah tidak digunakan lagi di era modern", "Displacement dipilih karena berkorelasi langsung dengan bobot motor"], ans: 0 },
+  { cat: "Piston Displacement", q: "Bagaimana rasio kompresi berinteraksi dengan displacement untuk menentukan efisiensi termal dan output tenaga mesin motor?", opts: ["Rasio kompresi tidak berpengaruh pada output tenaga jika displacement cukup besar", "Rasio kompresi lebih tinggi meningkatkan efisiensi termal dengan mengekstrak lebih banyak energi dari campuran bakar yang sama; dikombinasikan dengan displacement besar, menghasilkan output tenaga maksimal; namun dibatasi oleh oktan bahan bakar dan integritas material", "Rasio kompresi dan displacement adalah parameter independen yang tidak saling mempengaruhi", "Semakin rendah rasio kompresi, semakin efisien mesin dalam menggunakan displacement", "Rasio kompresi hanya penting untuk mesin diesel, tidak untuk bensin"], ans: 1 },
+  { cat: "Piston Displacement", q: "Mengapa motor berkapasitas sama namun dari era berbeda (misal: 600cc sport tahun 2000 vs 2023) bisa memiliki perbedaan tenaga yang sangat signifikan?", opts: ["Karena regulasi emisi menurunkan tenaga motor modern", "Kemajuan teknologi (manajemen mesin elektronik presisi, material lebih ringan, desain silinder head yang dioptimasi, cam timing variabel, dll.) memungkinkan ekstraksi tenaga lebih efisien dari displacement yang sama", "Motor lama selalu lebih bertenaga karena tidak dibatasi emisi", "Perbedaan tenaga hanya karena perbedaan exhaust system", "Tidak ada perbedaan signifikan karena displacement sama"], ans: 1 },
+  { cat: "Piston Displacement", q: "Analisis trade-off antara mesin single-cylinder berkapasitas besar (misal 690cc) vs parallel-twin berkapasitas sama dalam konteks motor adventure!", opts: ["Single selalu inferior dibanding twin dalam semua aspek", "Single cylinder menawarkan bobot lebih ringan, simpelness mekanis, dan torsi karakter kuat di RPM rendah yang ideal untuk technical off-road; twin lebih smooth, performa jalan raya lebih baik, tapi lebih berat dan kompleks; pilihan tergantung prioritas penggunaan", "Parallel twin selalu lebih bertenaga dan lebih ringan dari single", "Jumlah silinder tidak mempengaruhi karakter mesin, hanya displacement total", "Single cylinder 690cc tidak tersedia secara komersial untuk motor adventure"], ans: 1 },
+
+  // === KNOBBY TIRES (7 soal) ===
+  { cat: "Knobby Tires", q: "Mengapa ban knobby memberikan grip superior di permukaan tanah lunak namun performa buruk di aspal? Jelaskan mekanisme fisika yang terlibat!", opts: ["Ban knobby buruk di aspal karena materialnya berbeda dari ban jalan", "Di tanah lunak, knob menembus permukaan dan menciptakan interlocking mechanical grip; di aspal, area kontak kecil (hanya ujung knob) menghasilkan footprint kecil dengan grip terbatas dan deformasi knob berlebihan yang menghasilkan handling tidak presisi", "Ban knobby buruk di aspal hanya karena kebisingan yang menganggu konsentrasi", "Ban knobby sebenarnya lebih baik di aspal kering, hanya buruk di aspal basah", "Mekanisme grip ban knobby dan ban jalan identik secara fisika"], ans: 1 },
+  { cat: "Knobby Tires", q: "Bagaimana pola knob yang berbeda (motocross, enduro, trial) dioptimalkan untuk jenis terrain berbeda?", opts: ["Semua jenis ban knobby menggunakan pola yang sama, hanya berbeda ukuran", "MX knob lebih besar dan jarang untuk ejeksi lumpur optimal; enduro lebih medium dengan spacing seimbang untuk berbagai terrain; trial menggunakan pola berbeda dengan compound lembut untuk grip maksimal di batu tanpa memerlukan kecepatan", "Pola knob tidak berpengaruh, hanya compound karet yang penting", "Ban trial menggunakan knob terbesar karena terrain yang paling ekstrem", "Perbedaan pola knob hanya untuk identifikasi visual jenis ban"], ans: 1 },
+  { cat: "Knobby Tires", q: "Mengapa tekanan udara yang tepat sangat kritis untuk performa ban knobby di off-road? Analisis efek tekanan berlebih vs tekanan kurang!", opts: ["Tekanan udara tidak berpengaruh pada ban knobby karena knobbnya yang menyerap benturan", "Tekanan kurang meningkatkan kontak permukaan dan grip tapi berisiko pinch flat dan kerusakan pelek; tekanan berlebih mengurangi deformasi kontak dan grip namun memberikan perlindungan pelek lebih baik; optimal bergantung pada terrain, beban, dan gaya berkendara", "Tekanan rendah selalu lebih baik untuk off-road dalam semua kondisi", "Tekanan tinggi lebih baik untuk off-road karena kecepatan lebih tinggi", "Ban knobby harus digunakan dengan tekanan sama dengan ban jalan biasa"], ans: 1 },
+  { cat: "Knobby Tires", q: "Apa yang terjadi ketika motor dengan ban knobby digunakan intensif di jalan aspal dan mengapa ini bermasalah secara keselamatan?", opts: ["Tidak ada masalah keselamatan khusus, hanya ban lebih cepat habis", "Knob aus secara tidak merata, menjadi rounded/tergerus, kehilangan kemampuan self-cleaning; karet compound off-road tidak dioptimalkan untuk panas aspal sehingga bisa degrade lebih cepat; handling di kecepatan tinggi menjadi unpredictable", "Ban knobby di aspal hanya bermasalah dalam hal konsumsi bahan bakar", "Ban knobby di aspal menghasilkan grip yang sama dengan ban jalan", "Satu-satunya masalah ban knobby di aspal adalah kebisingan tinggi"], ans: 1 },
+  { cat: "Knobby Tires", q: "Mengapa ban dual-sport (knobbly tapi bisa digunakan di aspal) tidak bisa benar-benar mengoptimalkan performa untuk kedua terrain? Analisis kompromi desainnya!", opts: ["Ban dual-sport sebenarnya optimal di semua terrain, tidak ada kompromi", "Dual-sport adalah kompromi: knob cukup untuk off-road tapi tidak seagresif pure off-road; compound cukup keras untuk ketahanan aspal tapi kurang optimal untuk grip off-road murni; pengendara menerima 70-30 atau 50-50 kompromi tergantung spesifikasi produk", "Ban dual-sport lebih baik dari ban khusus off-road di semua kondisi", "Tidak ada kompromi desain, teknologi modern memungkinkan ban optimal di semua terrain", "Ban dual-sport identik dengan ban aspal yang ditambah sedikit knob kecil"], ans: 1 },
+  { cat: "Knobby Tires", q: "Bagaimana compound karet (rubber compound) mempengaruhi karakteristik grip ban knobby di suhu dan kondisi terrain yang berbeda?", opts: ["Compound karet tidak mempengaruhi grip, hanya pola knob yang berperan", "Compound lebih soft memberikan grip lebih baik karena deformasi mikroskopik yang lebih besar pada irregularitas permukaan, tapi lebih cepat aus; compound keras lebih tahan lama tapi kurang grippy; suhu mempengaruhi viskositas compound yang mempengaruhi grip", "Semua ban knobby menggunakan compound yang sama, hanya pabrikan yang berbeda", "Compound lebih keras selalu lebih baik karena lebih tahan pada terrain keras", "Suhu tidak mempengaruhi performa ban knobby secara signifikan"], ans: 1 },
+  { cat: "Knobby Tires", q: "Mengapa ban knobby memerlukan 'seating' (break-in period) yang lebih singkat dibanding ban slick balap? Analisis secara kimiawi dan fisika!", opts: ["Ban knobby tidak memerlukan break-in period sama sekali", "Knobby tidak memiliki lapisan release agent sebanyak ban slick; surface area per kontak knob kecil sehingga heatcycle cepat tercapai; pattern terbuka tidak memerlukan thermal homogenization seperti slick yang seluruh permukaannya harus mencapai suhu optimal bersamaan", "Break-in period knobby sama panjangnya dengan ban slick", "Ban slick tidak memerlukan break-in period karena digunakan di sirkuit", "Knobby memerlukan break-in lebih panjang karena compound lebih keras"], ans: 1 },
+
+  // === TRAIL BIKE (6 soal) ===
+  { cat: "Trail Bike", q: "Apa yang membedakan trail bike dari dirt bike dan enduro bike dalam hal filosofi penggunaan dan desain?", opts: ["Trail bike, dirt bike, dan enduro bike adalah istilah yang sama persis", "Trail bike didesain untuk riding leisure di jalur alam dengan keseimbangan antara kenyamanan dan kemampuan off-road; tidak seagresif MX, tidak sepraktis enduro untuk long-distance; fokus pada kesenangan eksplorasi alam dengan kesulitan teknis menengah", "Trail bike adalah versi jalan raya dari dirt bike", "Trail bike selalu memiliki kapasitas mesin lebih kecil dari enduro", "Trail bike dikhususkan untuk kompetisi di jalur alami"], ans: 1 },
+  { cat: "Trail Bike", q: "Mengapa trail bike yang memiliki sertifikasi street legal sering disebut sebagai 'dual sport' dan apa keuntungan praktisnya?", opts: ["Dual sport adalah istilah pemasaran tanpa perbedaan teknis nyata", "Dual sport/street legal trail bike memungkinkan pengendara berkendara dari rumah ke trailhead di jalan aspal, kemudian langsung off-road tanpa perlu mengangkut motor dengan trailer; mengeliminasi logistik yang kompleks", "Dual sport hanya berbeda dalam sistem pencahayaan dari trail bike biasa", "Street legal trail bike lebih mahal tapi tidak memberikan keuntungan praktis", "Dual sport tidak bisa benar-benar digunakan off-road karena modifikasi street legal"], ans: 1 },
+  { cat: "Trail Bike", q: "Bagaimana kapasitas mesin trail bike mempengaruhi jenis trail yang bisa ditangani? Bandingkan 125cc vs 450cc untuk trail riding!", opts: ["Kapasitas mesin tidak berpengaruh pada jenis trail yang bisa dilewati", "125cc lebih sesuai untuk trail technical dengan obstacle rendah dan terrain padat di mana manajemen presisi lebih penting dari raw power; 450cc menawarkan tenaga untuk tackle terrain lebih challenging, climb curam, dan covering jarak jauh namun lebih berat dan demanding untuk dikontrol", "450cc selalu lebih baik untuk semua jenis trail tanpa pengecualian", "125cc lebih baik untuk semua trail karena lebih ringan dan mudah dikontrol", "Perbedaan cc tidak berpengaruh untuk trail riding leisure"], ans: 1 },
+  { cat: "Trail Bike", q: "Mengapa pemilihan gearing (sprocket ratio) sangat mempengaruhi pengalaman trail riding, terutama di terrain technical?", opts: ["Gearing tidak mempengaruhi pengalaman trail, hanya kecepatan puncak", "Lower gearing (sprocket belakang lebih besar) memberikan torsi lebih besar di roda dan kontrol kecepatan lebih halus di terrain technical (rocky sections, steep climbs), namun mengurangi kecepatan puncak untuk bagian cepat", "Higher gearing selalu lebih baik untuk trail riding off-road", "Gearing trail bike sudah dioptimalkan pabrikan dan tidak perlu diubah", "Gearing hanya penting untuk kompetisi, tidak untuk leisure trail riding"], ans: 1 },
+  { cat: "Trail Bike", q: "Analisis bagaimana desain 'wide ratio gearbox' pada trail bike berbeda dari 'close ratio' yang biasa di motor sport, dan mengapa ini penting!", opts: ["Close ratio gearbox lebih baik untuk trail bike karena lebih banyak pilihan rasio", "Wide ratio gearbox menyediakan rasio yang lebih spread out antara gigi, memungkinkan mesin beroperasi efisien di RPM optimal meski kecepatan bervariasi drastis (dari berjalan sangat pelan di technical section hingga medium speed di open trail)", "Tidak ada perbedaan antara wide dan close ratio gearbox dalam praktik", "Trail bike menggunakan gearbox yang sama persis dengan motor balap MX", "Wide ratio gearbox hanya untuk motor bertenaga rendah karena kurang presisi"], ans: 1 },
+  { cat: "Trail Bike", q: "Mengapa trail riding komunitas semakin memperhatikan isu 'trail sustainability'? Bagaimana perilaku berkendara dan spesifikasi motor mempengaruhi kerusakan jalur?", opts: ["Trail riding tidak menyebabkan kerusakan lingkungan yang signifikan", "Motor dengan ban agresif di terrain basah menyebabkan erosion berlebihan; spinning tires merusak vegetasi dan soil structure; trail berlebihan dari grup besar menciptakan rutting; komunitas sadar harus memilih ban sesuai kondisi, menghindari riding di jalur basah, dan berpartisipasi dalam trail maintenance", "Kerusakan trail hanya terjadi jika menggunakan motor bertenaga besar", "Trail sustainability hanya isu di negara-negara tertentu", "Spesifikasi motor tidak mempengaruhi kerusakan trail, hanya teknik berkendara"], ans: 1 },
+
+  // === TRIAL BIKE (7 soal) ===
+  { cat: "Trial Bike", q: "Apa yang membuat olahraga 'observed trials' unik dibanding cabang motorsport off-road lainnya? Apa yang dinilai dalam kompetisi?", opts: ["Trial adalah kompetisi kecepatan di medan off-road biasa", "Observed trials menilai presisi teknis pengendara dalam melewati section obstacle tanpa menyentuhkan kaki ke tanah (dabs); bukan kecepatan tapi clean riding; poin diakumulasi dari dabs (penalti kontak kaki) dan zona yang dilalui", "Trial menilai kecepatan dan akrobatik seperti motocross freestyle", "Trial adalah kompetisi jarak jauh seperti enduro dengan timing stages", "Trial bike dikompetisikan di circuit aspal khusus"], ans: 1 },
+  { cat: "Trial Bike", q: "Mengapa trial bike tidak memiliki kursi (seat)? Bagaimana ini mencerminkan filosofi olahraga dan teknik berkendara yang diperlukan?", opts: ["Trial bike tidak memiliki kursi karena regulasi melarangnya", "Trial riding dilakukan seluruhnya dalam posisi berdiri di footpeg; tanpa kursi mengurangi bobot dan memungkinkan pengendara menggunakan tubuh sepenuhnya untuk balance dan weight transfer; duduk adalah tanda teknik yang buruk dalam trial", "Trial bike tidak memiliki kursi karena tidak dirancang untuk perjalanan jauh", "Absennya kursi adalah fitur estetika bukan kebutuhan teknis", "Trial bike memiliki kursi kecil tersembunyi yang tidak terlihat"], ans: 1 },
+  { cat: "Trial Bike", q: "Bagaimana teknik 'bunnyhop' dan 'zap' digunakan dalam trial untuk mengatasi obstacle vertikal? Analisis fisika yang terlibat!", opts: ["Bunnyhop dan zap adalah istilah yang sama persis", "Bunnyhop mengangkat kedua roda dengan mengompresi suspensi dan menggunakan momentum; zap adalah mengangkat roda depan dengan blip throttle tiba-tiba lalu menarik handlebar; keduanya memanfaatkan momentum sudut dan torsi reaktif mesin untuk mengatasi obstacle", "Teknik ini hanya bisa dilakukan oleh pengendara profesional dengan motor khusus", "Bunnyhop hanya bisa dilakukan di sepeda non-bermesin, tidak di trial bike", "Zap adalah nama merek komponen khusus trial, bukan teknik"], ans: 1 },
+  { cat: "Trial Bike", q: "Mengapa trial bike menggunakan ban dengan compound sangat lunak tanpa tread yang dalam? Bagaimana ini berbeda dari filosofi ban off-road lainnya?", opts: ["Trial menggunakan ban lunak karena lebih murah diproduksi", "Ban trial compound ultra-soft memaksimalkan deformasi conforming terhadap irregularitas batu/obstacle untuk chemical dan mechanical adhesion maksimal; tanpa tread dalam karena tidak membutuhkan self-cleaning di speed tinggi; grip berasal dari compliance material bukan dari pattern", "Compound lunak dipilih hanya karena tidak merusak obstacle alami", "Ban trial sama dengan ban enduro, hanya ukurannya berbeda", "Trial menggunakan ban tanpa tread karena digunakan di permukaan mulus"], ans: 1 },
+  { cat: "Trial Bike", q: "Bagaimana teknik 'static balance' (diam tanpa menyentuh kaki ke tanah) mencerminkan skill level pengendara trial? Apa prinsip fisika yang memungkinkan hal ini?", opts: ["Static balance di trial tidak mungkin dilakukan lebih dari beberapa detik", "Static balance atau 'track stand' memerlukan koordinasi konstan antara input throttle kecil, modulasi rem, dan micro-adjustment kemudi; pengendara elite bisa mempertahankan ini selama menit; memanfaatkan gyroscopic effect roda dan subtle throttle steering", "Static balance hanya bisa dilakukan di permukaan rata", "Prinsip static balance trial identik dengan keseimbangan sepeda biasa", "Static balance dicapai dengan menggunakan kaki sebagai penyeimbang tersembunyi"], ans: 1 },
+  { cat: "Trial Bike", q: "Mengapa perkembangan trial bike dari mesin 2-tak ke 4-tak memiliki kontroversi teknis di komunitas trial?", opts: ["Kontroversi hanya soal harga, bukan teknis", "4-tak menghasilkan karakter tenaga lebih smooth namun kurang 'snap' impulsif yang digunakan pengendara 2-tak untuk teknik seperti zap; 2-tak lebih ringan dan power delivery lebih eksplisit; komunitas terbagi antara yang menghargai 'feel' 2-tak vs kemudahan dan daya tahan 4-tak modern", "4-tak selalu superior untuk trial karena tenaga lebih besar", "Kontroversi hanya masalah suara mesin, bukan performa teknis", "2-tak sudah tidak digunakan di trial kompetitif sama sekali"], ans: 1 },
+  { cat: "Trial Bike", q: "Apa yang dimaksud dengan 'clean section' dalam kompetisi trial dan bagaimana sistem penilaian menentukan pemenang?", opts: ["Clean section adalah bagian trek yang mudah tanpa obstacle", "Clean section berarti melewati satu zona obstacle tanpa dab (kaki menyentuh tanah) sama sekali; sistem penilaian akumulatif menghitung total dab di semua section; pengendara dengan poin penalti terendah menang; clean (nol dab) adalah pencapaian terbaik per section", "Pemenang trial ditentukan oleh waktu tercepat melewati semua section", "Clean section hanya ada di kompetisi elite, tidak di level amatir", "Sistem penilaian trial menggunakan poin positif yang dikumpulkan bukan penalti"], ans: 1 },
+
+  // === TRIKE/TRICYCLE (8 soal) ===
+  { cat: "Trike/Tricycle", q: "Bagaimana stabilitas inherent trike dibanding sepeda motor dua roda mempengaruhi persyaratan SIM dan aksesibilitas berkendara?", opts: ["Trike memerlukan SIM yang lebih sulit dari motor dua roda", "Karena trike tidak dapat terjatuh secara lateral, banyak yurisdiksi mengklasifikasikannya berbeda (kadang sebagai motor, kadang otomobil ringan), membuatnya aksesibel untuk pengendara yang kesulitan dengan balancing motor dua roda (lansia, disabilitas tertentu)", "Trike dan motor dua roda memerlukan persyaratan SIM yang identik di semua negara", "Trike lebih sulit dikendarai sehingga memerlukan pelatihan ekstra", "Trike tidak memerlukan SIM karena termasuk kendaraan non-bermotor"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Mengapa trike dengan dua roda di belakang (seperti trike konvensional) berperilaku sangat berbeda saat berbelok dibanding trike dengan dua roda di depan (seperti Piaggio MP3)?", opts: ["Tidak ada perbedaan dalam perilaku berbelok antara kedua konfigurasi", "Dua roda belakang menciptakan rear-end stability tapi memerlukan body lean saat berbelok seperti mobil; dua roda depan (MP3 style) memungkinkan roda depan lean bersamaan secara paralel, memberikan feel lebih mirip motor dua roda dengan grip ganda", "Dua roda di depan selalu lebih aman karena steering lebih stabil", "Konfigurasi roda tidak mempengaruhi handling, hanya tampilan visual", "Trike dua roda depan tidak bisa berbelok setajam trike dua roda belakang"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Analisis mengapa Can-Am Spyder menggunakan konfigurasi dua roda depan (BRP) dan bagaimana sistem elektroniknya menggantikan dynamics yang hilang!", opts: ["Konfigurasi dua depan dipilih murni untuk estetika visual yang unik", "Dua roda depan meningkatkan grip dan stabilitas braking; sistem VSS (Vehicle Stability System) dengan ABS dan traction control tiga saluran mengkompensasi tidak adanya kemampuan lean, memberikan pengalaman berkendara yang familiar meski berbeda dari motor konvensional", "Konfigurasi BRP memungkinkan kecepatan lebih tinggi dari motor dua roda", "Elektronik pada Spyder hanya untuk kenyamanan, bukan kompensasi dinamis", "Konfigurasi dua roda depan lebih murah diproduksi daripada dua roda belakang"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Mengapa trike custom yang dibangun dari chopper/cruiser sering mengalami masalah handling 'axle tramp' di permukaan tidak rata? Jelaskan dinamika yang terlibat!", opts: ["Axle tramp adalah masalah normal yang juga dialami semua motor dua roda", "Trike custom dengan axle rigid di belakang mengalami axle tramp ketika satu roda menemukan bumps; tanpa differential atau suspensi independen, torsi dari bumps menyebar ke seluruh chassis menyebabkan getaran dan perilaku yang tidak dapat diprediksi", "Axle tramp hanya terjadi pada trike dengan mesin di atas 1000cc", "Masalah axle tramp pada trike disebabkan oleh ban yang tidak tepat", "Trike tidak pernah mengalami axle tramp karena tiga roda lebih stabil"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Bagaimana klasifikasi hukum trike bervariasi antar negara dan mengapa ini menciptakan komplikasi bagi pengendara yang bepergian internasional?", opts: ["Trike diklasifikasikan sama di semua negara sebagai kendaraan roda tiga", "Di beberapa negara trike adalah 'motorcycle' (perlu SIM motor), di lain adalah 'autocycle' atau 'quadricycle' (perlu SIM mobil); beberapa memerlukan sabuk pengaman, lain tidak; variasi ini menyebabkan kebingungan saat lintas batas", "Trike internasional menggunakan paspor kendaraan yang universal", "Hanya negara tertentu yang memiliki regulasi khusus trike", "Klasifikasi trike sudah distandarisasi oleh konvensi internasional"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Mengapa trike elektrik (seperti Arcimoto) mendapat perhatian sebagai solusi mobilitas urban? Analisis keunggulan dan keterbatasannya!", opts: ["Trike elektrik hanya populer sebagai kendaraan novelty, tidak praktis", "Trike elektrik menawarkan efisiensi lebih tinggi dari mobil untuk penggunaan single-occupant urban, footprint parkir lebih kecil, zero-emisi operasional, dan stabilitas built-in tanpa perlu skill balancing; keterbatasan: cuaca exposure, kapasitas penumpang/barang terbatas, range mungkin terbatas", "Trike elektrik lebih mahal dari mobil listrik tanpa keunggulan nyata", "Trike elektrik tidak bisa digunakan di jalan umum karena belum ada regulasi", "Trike elektrik hanya cocok untuk iklim tropis"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Bagaimana penambahan reverse gear (gigi mundur) pada trike mencerminkan perbedaan fundamental antara dinamika trike dan sepeda motor konvensional?", opts: ["Reverse gear pada trike adalah fitur mewah opsional bukan kebutuhan", "Trike berat (terutama touring trike) tidak bisa didorong mundur dengan kaki seperti motor dua roda karena berat dan tidak ada kemampuan lean-balance; reverse gear memungkinkan manuver parkir yang diperlukan dalam kondisi normal penggunaan", "Reverse gear pada trike sama fungsinya dengan di mobil", "Trike tidak memerlukan reverse gear karena bisa berputar di tempat", "Hanya trike berkapasitas di atas 1000cc yang memerlukan reverse gear"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Dalam konteks aksesibilitas inklusif, bagaimana trike membuka peluang berkendara bagi populasi yang sebelumnya tidak bisa menikmati pengalaman riding?", opts: ["Trike tidak memberikan keuntungan aksesibilitas dibanding motor dua roda", "Trike memungkinkan orang dengan keterbatasan keseimbangan, amputasi tungkai bawah, atau kondisi yang mempengaruhi koordinasi untuk menikmati pengalaman open-air riding; beberapa negara mengizinkan trike khusus untuk individu yang tidak lulus uji riding dua roda karena kondisi medis tertentu", "Aksesibilitas trike hanya relevan untuk lansia, bukan untuk orang dengan disabilitas", "Trike lebih sulit dikendarai dari motor dua roda sehingga tidak meningkatkan aksesibilitas", "Trike aksesibilitas hanya tersedia sebagai kendaraan medis bersubsidi"], ans: 1 },
+
+  // === STREET BIKE LANJUTAN & MIX HOTS (20 soal untuk mencapai 100) ===
+  { cat: "Motorcycle", q: "Mengapa motor dengan traction control lebih canggih (seperti MTC dengan 8 level) memberikan keunggulan di sirkuit balap yang memiliki variasi grip antar sektor?", opts: ["Traction control canggih hanya untuk motor penumpang biasa", "Sistem multi-level memungkinkan pengendara atau engineer setting perlindungan yang berbeda untuk sektor berbeda: lebih permisif di sektor high-grip tapi lebih konservatif di area prone to slide, memaksimalkan kecepatan keseluruhan sekaligus mencegah high-side crashes", "Semua level traction control menghasilkan performa yang sama di sirkuit", "Traction control canggih hanya bermanfaat dalam kondisi hujan", "Level traction control yang lebih tinggi selalu menghasilkan lap time lebih baik"], ans: 1 },
+  { cat: "Dirt Bike", q: "Apa yang dimaksud dengan 'holeshot' dalam motocross racing dan mengapa mencapainya memberikan keuntungan taktis yang signifikan?", opts: ["Holeshot adalah teknik pengereman khusus di akhir straight", "Holeshot adalah pengendara yang pertama memasuki tikungan pertama setelah start; memberikan keuntungan posisi terdepan yang menghindari 'roost' (tanah berterbang) dari rider lain, memberikan pilihan garis terbaik, dan secara psikologis menekan kompetitor di belakang", "Holeshot hanya penting di kompetisi amatir, tidak di level profesional", "Holeshot berarti mencapai kecepatan tertinggi dalam satu lap balap", "Holeshot diberikan kepada pengendara dengan waktu kualifikasi terbaik"], ans: 1 },
+  { cat: "Wheelbase", q: "Bagaimana modifikasi 'hardtail' (menghilangkan suspensi belakang) pada chopper mempengaruhi wheelbase efektif dan karakteristik berkendara?", opts: ["Hardtail tidak mempengaruhi wheelbase karena hanya masalah suspensi", "Hardtail menghilangkan travel suspensi belakang, secara efektif mempersingkat (atau memanjangkan tergantung desain) wheelbase yang berfungsi; ride menjadi sangat keras karena tidak ada penyerapan benturan; handling karakteristik berubah karena geometri statis vs dinamis berbeda", "Hardtail membuat wheelbase lebih panjang selalu untuk stabilitas", "Modifikasi hardtail dilarang secara hukum di semua negara", "Hardtail hanya mempengaruhi estetika, bukan handling atau wheelbase"], ans: 1 },
+  { cat: "Knobby Tires", q: "Mengapa 'mousse' (foam insert) digunakan sebagai pengganti ban dalam di kompetisi off-road ekstrem? Analisis trade-off penggunaannya!", opts: ["Mousse lebih murah dari ban dalam konvensional", "Mousse mengeliminasi risiko puncture/flat yang bisa mengakhiri balapan; memberikan tekanan konstan sekitar 0.8-1 bar equivalent; trade-off: lebih berat, menghasilkan panas lebih banyak saat berkendara lama, tidak bisa diinflasi/dikempeskan, dan umur lebih pendek dari ban dalam", "Mousse digunakan karena regulasi melarang ban dalam di kompetisi", "Mousse memberikan grip lebih baik dari ban dalam karena materialnya", "Mousse dan ban dalam menghasilkan performa yang identik dalam semua kondisi"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Mengapa 'Dakar Rally' dianggap sebagai tantangan enduro ultimate? Apa yang membedakannya dari kompetisi enduro lainnya dari perspektif logistik dan teknis?", opts: ["Dakar adalah kompetisi enduro biasa yang hanya terkenal karena marketing", "Dakar menempuh jarak ribuan km melalui terrain ekstrem (gurun, dunes, rocky mountains) selama 2+ minggu; memerlukan navigasi mandiri dengan roadbook; perpaduan tuntutan fisik ultra-endurance, technical riding, navigasi, dan manajemen mesin yang tidak tertandingi; mekanik hanya bisa bantu di bivouacs", "Dakar adalah kompetisi motocross yang diadakan di Afrika", "Dakar mudah diikuti oleh pengendara amatir berpengalaman", "Dakar hanya untuk motor berkapasitas di atas 1000cc"], ans: 1 },
+  { cat: "Street Legal Motorcycle", q: "Mengapa 'lane splitting' (berkendara di antara dua lajur kendaraan berdiri) memiliki status hukum yang berbeda di berbagai negara, dan apa argumen keselamatan pro-kontranya?", opts: ["Lane splitting dilarang di semua negara karena jelas berbahaya", "Status legal lane splitting bervariasi karena perbedaan pendekatan terhadap evidence-based policy; California melegalkan karena studi menunjukkan mengurangi kemacetan dan beberapa jenis kecelakaan belakang; kontra: risiko terkena cermin, gerakan tiba-tiba pengendara mobil; pendukung: mengurangi rear-end collision untuk motor", "Lane splitting diizinkan di semua negara selama kecepatan di bawah 20 km/jam", "Lane splitting hanya legal untuk motor di bawah 125cc", "Tidak ada penelitian ilmiah mengenai keselamatan lane splitting"], ans: 1 },
+  { cat: "Motorcycle", q: "Bagaimana sistem 'ride-by-wire' (electronic throttle) mengubah cara mesin motor merespons input pengendara dibanding throttle kabel konvensional?", opts: ["Ride-by-wire identik dengan throttle kabel dalam cara kerjanya", "Throttle kabel memberikan hubungan mekanis langsung dengan butterfly valve; ride-by-wire mengirim sinyal elektronik ke ECU yang kemudian mengontrol throttle body sesuai input, kondisi mesin, dan riding mode aktif—memungkinkan maps yang berbeda, launch control, dan traction control yang lebih presisi", "Ride-by-wire mengurangi responsivitas throttle untuk keselamatan", "Sistem kabel lebih presisi dari ride-by-wire dalam semua situasi", "Ride-by-wire hanya mengubah feel throttle tanpa perbedaan fungsional"], ans: 1 },
+  { cat: "Trail Bike", q: "Mengapa manajemen momentum sangat kritis saat mengendari trail bike di medan technical (rocky/rooted terrain) berbeda dari berkendara di jalan terbuka?", opts: ["Manajemen momentum identik di semua terrain, hanya beda kecepatan", "Di terrain technical, terlalu cepat kehilangan kontrol, terlalu lambat kehilangan momentum untuk mengatasi obstacle; pengendara harus 'read terrain' jauh ke depan dan mempertahankan kecepatan optimum—assez pour passer les obstacles mais pas trop pour garder le controle", "Di terrain technical, kecepatan tinggi selalu lebih baik untuk melampaui obstacle", "Momentum tidak berpengaruh di terrain technical, hanya teknik kaki yang penting", "Trail bike otomatis mengelola momentum dengan sistem elektroniknya"], ans: 1 },
+  { cat: "Trike/Tricycle", q: "Bagaimana distribusi berat yang tidak seimbang di trike (dibanding motor dua roda) mempengaruhi respons terhadap cross-winds yang kencang?", opts: ["Cross-wind tidak mempengaruhi trike karena tiga titik kontak lebih stabil", "Trike dengan lebar jejak besar memiliki frontal area lebih luas yang lebih terkena angin samping; tidak memiliki kemampuan countersteer dan lean alami untuk mengkompensasi; pengendara harus aktif melawan momen yaw yang ditimbulkan cross-wind dengan steering input", "Trike lebih stabil dari motor dalam angin karena tiga roda", "Cross-wind hanya masalah bagi motor dengan fairing besar, bukan trike", "Distribusi berat trike tidak berpengaruh pada sensitivitas angin"], ans: 1 },
+  { cat: "Piston Displacement", q: "Mengapa 'stroker' engine (mesin dengan stroke diperpanjang) populer dalam kustomisasi Harley-Davidson V-twin? Apa keuntungan dan risikonya?", opts: ["Stroker hanya digunakan untuk meningkatkan suara mesin, bukan performa", "Memperpanjang stroke meningkatkan displacement dan torsi karakter khas V-twin, menghasilkan sensasi 'thumping' yang diinginkan; risikonya: piston velocity lebih tinggi meningkatkan tekanan pada connecting rod dan bearing, potensi thermal dan mechanical stress lebih besar, memerlukan komponen upgraded", "Stroker engine mengurangi torsi tapi meningkatkan tenaga puncak", "Stroker mod hanya bisa dilakukan oleh pabrikan, tidak oleh bengkel aftermarket", "Memperpanjang stroke tidak berpengaruh pada displacement karena bore tetap sama"], ans: 1 },
+  { cat: "Minibike", q: "Mengapa MotoGP dan WSB junior programs menggunakan minibike/mini-moto sebagai platform pengembangan awal bagi calon pembalap profesional?", opts: ["Karena minibike lebih murah sehingga pabrikan tidak rugi jika rusak", "Platform yang lebih kecil memungkinkan anak-anak belajar teknik fundamental (lean angle, braking point, throttle modulation) dalam lingkungan yang lebih aman dan terkontrol; skills yang dipelajari di mini-moto transferable ke motor full-size; Marc Marquez adalah contoh nyata sistem ini", "Minibike digunakan karena anak-anak tidak bisa mengendarai motor full-size", "Program junior menggunakan minibike hanya untuk publisitas marketing", "Minibike lebih cepat dari motor junior full-size sehingga lebih kompetitif"], ans: 1 },
+  { cat: "Motorcycle", q: "Analisis bagaimana kemiringan sudut lean (lean angle) pada sportbike modern bisa mencapai 60+ derajat saat cornering tanpa terjatuh. Prinsip fisika apa yang memungkinkan ini?", opts: ["Sangat berbahaya dan tidak mungkin secara fisika, motor pasti jatuh", "Keseimbangan antara centripetal force dari cornering dan gravitasi menciptakan resultant force yang berada di dalam cone of friction ban; semakin cepat cornering, semakin besar centripetal force, memungkinkan lean angle lebih ekstrem sambil mempertahankan keseimbangan—ban modern dapat menghasilkan lateral grip sangat tinggi", "Motor bisa lean ekstrem hanya karena elektronik yang menghitung sudut", "Lean angle maksimal adalah 45 derajat karena batas matematika keseimbangan", "Lean ekstrem dimungkinkan karena rangka motor bisa berubah bentuk sedikit"], ans: 1 },
+  { cat: "Moped", q: "Bagaimana regulasi moped di Asia Tenggara (terutama Indonesia dan Vietnam) berbeda dari Eropa dalam hal batas kapasitas dan dampaknya pada industri transportasi?", opts: ["Regulasi moped di Asia Tenggara identik dengan Eropa", "Di Asia Tenggara, kendaraan bermesin 50-125cc sering dioperasikan dalam gray area regulasi; di Indonesia skuter 110-125cc adalah transportation utama urban yang secara teknis bukan moped tapi melayani peran yang sama; regulasi lebih longgar memungkinkan industri motor skuter besar yang berbeda dari Eropa", "Asia Tenggara tidak memiliki regulasi khusus untuk kendaraan bermotor kecil", "Di Vietnam dan Indonesia, semua motor di atas 50cc dilarang", "Regulasi Asia Tenggara lebih ketat dari Eropa untuk kendaraan kecil"], ans: 1 },
+  { cat: "Enduro Motorcycle", q: "Bagaimana ISDE (International Six Days Enduro) berbeda dari enduro nasional biasa dalam hal tuntutan kompetisi dan prestige?", opts: ["ISDE hanya enduro biasa dengan peserta lebih banyak", "ISDE adalah olimpiade enduro—diselenggarakan 6 hari penuh dengan enam special test per hari plus transfer section; negara mengirimkan tim nasional; penilaian individual dan beregu; memerlukan pit crew terorganisir; one of the oldest continuous motorsport events in the world (sejak 1913)", "ISDE menggunakan format balap yang lebih mudah untuk menarik peserta lebih banyak", "Hanya Eropa yang berpartisipasi dalam ISDE", "ISDE adalah akronim untuk Indonesian Standard Dirt Enduro"], ans: 1 },
+  { cat: "Street Bike", q: "Mengapa 'torque curve' lebih penting dari 'peak power' untuk penggunaan street bike sehari-hari? Berikan analisis berdasarkan kondisi berkendara nyata!", opts: ["Peak power adalah satu-satunya parameter yang menentukan performa street bike", "Di penggunaan nyata, pengendara jarang mencapai RPM peak power; torsi yang tersedia di range RPM normal (2000-6000) menentukan responsivitas throttle, ease of overtaking, dan akselerasi dari lampu merah; mesin dengan torsi lembut dan lebar terasa lebih menyenangkan meski peak power lebih rendah", "Torque curve dan peak power memberikan informasi yang sama persis", "Torsi hanya penting untuk motor berat seperti cruiser, tidak untuk street bike", "Street bike modern tidak perlu mempertimbangkan torque curve karena elektronik mengurus segalanya"], ans: 1 },
+  { cat: "Motorcycle", q: "Jelaskan konsep 'headshake' atau 'tank slapper' pada sepeda motor dan kondisi apa yang menyebabkannya serta bagaimana mencegahnya!", opts: ["Headshake adalah getaran normal yang dialami semua motor di kecepatan tinggi", "Headshake/tank slapper adalah osilasi berulang cepat pada setang yang disebabkan hilangnya kontak roda depan sesaat (misal after jump atau bump) lalu wheel spin saat mendarat; dapat dicegah dengan steering damper, teknik berkendara yang tepat, dan setup suspensi yang benar", "Headshake hanya terjadi pada motor tua yang sudah aus", "Headshake adalah istilah untuk motor yang engine mounts-nya longgar", "Headshake dapat dicegah sepenuhnya dengan ban yang lebih lebar"], ans: 1 },
+  { cat: "Trial Bike", q: "Bagaimana perkembangan 'indoor trial' (X-Trial) telah mengubah persepsi publik tentang olahraga trial? Apa adaptasi teknis yang diperlukan?", opts: ["Indoor trial identik dengan outdoor trial, hanya venue berbeda", "X-Trial di arena indoor dengan obstacle artificial (rocks, logs, platforms, ramps) yang dibawa masuk; televisi-friendly format; spektakuler untuk penonton; motor memerlukan penyesuaian gearing untuk obstacle lebih artificial; atmosphere dan scoring dikondisikan untuk entertainment value, memperluas basis penggemar", "Indoor trial lebih mudah dari outdoor karena terrain lebih terkontrol", "X-Trial hanya diselenggarakan di satu negara sebagai format eksperimental", "Motor trial outdoor dan indoor menggunakan spesifikasi yang berbeda secara fundamental"], ans: 1 },
+  { cat: "Piston Displacement", q: "Mengapa mesin small displacement modern (250-400cc) sering dibandingkan performa laps time dengan mesin 600cc generasi sebelumnya? Teknologi apa yang memungkinkan ini?", opts: ["Klaim tersebut tidak akurat; 250cc tidak pernah bisa menyamai 600cc", "Manajemen mesin elektronik presisi, desain silinder head yang dioptimalkan secara computational (CFD), material lebih ringan, rasio kompresi lebih tinggi, dan free-revving design memungkinkan small displacement modern menghasilkan power-to-weight ratio yang kompetitif dengan mesin lebih besar tapi lebih tua teknologinya", "Hanya di kondisi tertentu 250cc bisa menyamai 600cc, bukan secara umum", "Mesin 250cc modern lebih cepat dari 600cc karena lebih ringan di semua kondisi", "Perbedaan displacement selalu menentukan performa tanpa pengecualian"], ans: 1 },
+  { cat: "Moped", q: "Dalam transisi menuju mobilitas elektrifikasi, bagaimana desain moped listrik mempertanyakan ulang definisi klasik 'moped'? Apa implikasi regulasinya?", opts: ["Moped listrik identik dengan moped bensin dan tidak perlu redefinisi", "Moped listrik tidak memiliki mesin pembakaran (definisi historis cc tidak berlaku); regulasi harus mendefinisikan ulang berdasarkan power output (kW), kecepatan maksimal, dan berat; beberapa negara menggunakan ekuivalensi: 4kW ≈ 50cc moped; ini memerlukan framework regulasi baru yang belum sepenuhnya seragam", "Moped listrik dilarang karena tidak memenuhi definisi 'moped' di semua negara", "Transisi ke listrik hanya masalah teknis tanpa implikasi regulasi", "Moped listrik otomatis diklasifikasikan sebagai sepeda biasa di semua negara"], ans: 1 },
+  { cat: "Motorcycle", q: "Mengapa 'lean angle sensors' dan 'IMU (Inertial Measurement Unit)' menjadi komponen kritis dalam elektronik motor sport modern? Sistem keselamatan apa yang bergantung padanya?", opts: ["IMU hanya digunakan untuk data logging, tidak mempengaruhi sistem aktif", "IMU mengukur lean angle, pitch, dan yaw secara real-time; memungkinkan traction control yang mempertimbangkan lean angle (mencegah high-side saat corner), cornering ABS (mempertahankan brake force saat leaning), dan wheelie control; tanpa IMU, sistem ini tidak bisa bekerja secara kontekstual dan efektif", "Lean angle sensors hanya digunakan di motor superbike profesional balap", "IMU hanya mempengaruhi kinerja GPS navigasi di motor", "Sistem ABS modern tidak memerlukan IMU untuk bekerja efektif"], ans: 1 },
 ];
 
-async function proxyFetch(url, idx=0){
-  if(idx>=PROXIES.length) throw new Error('All proxies exhausted');
-  try{
-    const r=await fetch(PROXIES[idx](url),{signal:AbortSignal.timeout(9000)});
-    if(!r.ok) throw new Error(`HTTP ${r.status}`);
-    return await r.text();
-  } catch(e){
-    return proxyFetch(url, idx+1);
+let currentQ = 0;
+let score = 0;
+let correct = 0;
+let wrong = 0;
+let answered = false;
+let questions = [];
+let studentName = '';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
+  return a;
 }
 
-// ══════════════════════════════════════════════
-// SOURCE 1: YAHOO FINANCE — Harga + Historis
-// ══════════════════════════════════════════════
-async function fetchYahoo(ticker){
-  const sym=ticker+'.JK';
-  const url=`https://query1.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=90d&includePrePost=false`;
-  const txt=await proxyFetch(url);
-  const j=JSON.parse(txt);
-  const res=j?.chart?.result?.[0];
-  if(!res) throw new Error('Yahoo: no result');
-
-  const meta=res.meta;
-  const q=res.indicators?.quote?.[0];
-  const ts=res.timestamp||[];
-  const closes=[], vols=[], highs=[], lows=[], opens=[];
-  for(let i=0;i<(q?.close||[]).length;i++){
-    if(q.close[i]!=null){
-      closes.push(q.close[i]);
-      vols.push(q.volume?.[i]||0);
-      highs.push(q.high?.[i]||q.close[i]);
-      lows.push(q.low?.[i]||q.close[i]);
-      opens.push(q.open?.[i]||q.close[i]);
-    }
-  }
-  if(closes.length<10) throw new Error('Yahoo: data tidak cukup');
-
-  const price=meta.regularMarketPrice||closes[closes.length-1];
-  const prev=meta.chartPreviousClose||meta.previousClose||closes[closes.length-2]||price;
-  return {
-    source:'Yahoo',
-    price, prev,
-    change: price-prev,
-    changePct: ((price-prev)/prev)*100,
-    volLot: Math.round((meta.regularMarketVolume||vols[vols.length-1]||0)/100),
-    closes, vols, highs, lows, opens,
-    name: meta.longName||meta.shortName||ticker,
-    currency: meta.currency||'IDR',
-    dayHigh: meta.regularMarketDayHigh||Math.max(...highs.slice(-1)),
-    dayLow:  meta.regularMarketDayLow ||Math.min(...lows.slice(-1)),
-    week52H: meta.fiftyTwoWeekHigh||Math.max(...highs),
-    week52L: meta.fiftyTwoWeekLow ||Math.min(...lows),
-  };
-}
-
-// ══════════════════════════════════════════════
-// SOURCE 2: STOOQ — Cross-check harga
-// ══════════════════════════════════════════════
-async function fetchStooq(ticker){
-  try{
-    const url=`https://stooq.com/q/d/l/?s=${ticker.toLowerCase()}.jk&i=d`;
-    const txt=await proxyFetch(url);
-    const lines=txt.trim().split('\n').filter(l=>l&&!l.startsWith('Date'));
-    if(!lines.length) return null;
-    const last=lines[lines.length-1].split(',');
-    const price=parseFloat(last[4]);
-    if(isNaN(price)) return null;
-
-    const closes=lines.slice(-90).map(l=>{
-      const p=parseFloat(l.split(',')[4]);
-      return isNaN(p)?null:p;
-    }).filter(Boolean);
-
-    return {source:'Stooq', price, closes};
-  } catch(e){ return null; }
-}
-
-// ══════════════════════════════════════════════
-// FUSI DATA multi-source → pilih paling akurat
-// ══════════════════════════════════════════════
-async function fetchMultiSource(ticker){
-  const [yahoo, stooq] = await Promise.allSettled([
-    fetchYahoo(ticker),
-    fetchStooq(ticker)
-  ]);
-
-  const y = yahoo.status==='fulfilled' ? yahoo.value : null;
-  const s = stooq.status==='fulfilled' ? stooq.value : null;
-
-  if(!y&&!s) throw new Error('Semua sumber gagal');
-
-  let data = y || {price:s.price,closes:s.closes,change:0,changePct:0,volLot:0,name:ticker};
-
-  // Cross-validate harga
-  let crossValid = 'Single Source';
-  let confidence = 60;
-  if(y&&s){
-    const diff=Math.abs(y.price-s.price)/y.price*100;
-    if(diff<5){
-      crossValid='✓ Yahoo+Stooq Match';
-      confidence=90;
-    } else {
-      crossValid=`⚠ Diff ${diff.toFixed(1)}%`;
-      confidence=70;
-    }
-    // Extend history with Stooq if Yahoo has less data
-    if(s.closes.length > y.closes.length){
-      data.closes=[...s.closes.slice(0, s.closes.length-y.closes.length), ...y.closes];
-    }
-  } else if(y) { crossValid='Yahoo Only'; confidence=75; }
-  else { data={price:s.price,closes:s.closes,change:0,changePct:0,volLot:0,name:ticker}; crossValid='Stooq Only'; confidence=65; }
-
-  data.crossValid=crossValid;
-  data.confidence=confidence;
-  data.sources=(y?'Yahoo ':'')+(s?'Stooq':'');
-  return data;
-}
-
-// ══════════════════════════════════════════════
-// TECHNICAL ANALYSIS ENGINE
-// ══════════════════════════════════════════════
-function sma(arr,n){ if(arr.length<n)return null; const s=arr.slice(-n); return s.reduce((a,b)=>a+b,0)/n; }
-function ema(arr,n){
-  if(arr.length<n)return null;
-  const k=2/(n+1);
-  let e=arr.slice(0,n).reduce((a,b)=>a+b,0)/n;
-  for(let i=n;i<arr.length;i++) e=arr[i]*k+e*(1-k);
-  return e;
-}
-function rsi(arr,n=14){
-  if(arr.length<n+1)return 50;
-  let g=0,l=0;
-  for(let i=arr.length-n;i<arr.length;i++){
-    const d=arr[i]-arr[i-1];
-    if(d>0)g+=d; else l+=Math.abs(d);
-  }
-  const rs=(g/n)/((l/n)||0.0001);
-  return 100-(100/(1+rs));
-}
-function macd(arr){
-  const e12=ema(arr,12), e26=ema(arr,26);
-  if(!e12||!e26) return {macd:0,signal:0,hist:0};
-  const m=e12-e26;
-  // Simple signal approximation
-  const e12s=ema(arr.slice(0,-3),12)||e12;
-  const e26s=ema(arr.slice(0,-3),26)||e26;
-  const sig=(e12s-e26s)*0.85+m*0.15;
-  return {macd:m,signal:sig,hist:m-sig};
-}
-function boll(arr,n=20){
-  if(arr.length<n)return{upper:0,mid:0,lower:0,bw:0,pct:0};
-  const sl=arr.slice(-n);
-  const m=sl.reduce((a,b)=>a+b,0)/n;
-  const std=Math.sqrt(sl.map(v=>(v-m)**2).reduce((a,b)=>a+b,0)/n);
-  const up=m+2*std, lo=m-2*std;
-  const cur=arr[arr.length-1];
-  return {upper:up,mid:m,lower:lo,bw:(up-lo)/m*100,pct:(cur-lo)/(up-lo||1)*100};
-}
-function stoch(arr,n=14){
-  if(arr.length<n) return 50;
-  const sl=arr.slice(-n);
-  const lo=Math.min(...sl),hi=Math.max(...sl);
-  return hi===lo?50:(arr[arr.length-1]-lo)/(hi-lo)*100;
-}
-function atr(highs,lows,closes,n=14){
-  if(!highs||highs.length<n) return 0;
-  let trs=[];
-  for(let i=1;i<closes.length;i++){
-    const hl=highs[i]-lows[i];
-    const hc=Math.abs(highs[i]-closes[i-1]);
-    const lc=Math.abs(lows[i]-closes[i-1]);
-    trs.push(Math.max(hl,hc,lc));
-  }
-  return trs.slice(-n).reduce((a,b)=>a+b,0)/n;
-}
-function avgVol(vols,n=10){
-  if(!vols||vols.length<n) return 0;
-  return vols.slice(-n).reduce((a,b)=>a+b,0)/n;
-}
-
-// ══════════════════════════════════════════════
-// PROFIT SCORE ENGINE
-// ══════════════════════════════════════════════
-function calcProfitScore(price,closes,vols,highs,lows,changePct){
-  const ma5=sma(closes,5), ma10=sma(closes,10), ma20=sma(closes,20), ma50=sma(closes,50);
-  const ema12=ema(closes,12), ema26=ema(closes,26);
-  const r=rsi(closes), mc=macd(closes), bb=boll(closes), st=stoch(closes);
-  const av=avgVol(vols,10);
-  const curVol=vols[vols.length-1]||0;
-  const volRatio=av>0?curVol/av:1;
-  const atrVal=atr(highs||[],lows||[],closes);
-
-  let score=50;
-  const signals=[];
-
-  // ─── TREND SCORING ───
-  let trend='side';
-  if(ma5&&ma20&&ma50){
-    if(price>ma5&&ma5>ma20){
-      score+=12; signals.push({t:'MA5>MA20 Bullish',c:'bull'});
-      if(ma20>ma50){ score+=8; signals.push({t:'MA20>MA50',c:'bull'}); trend='up';}
-    } else if(price<ma5&&ma5<ma20){ score-=10; trend='down'; signals.push({t:'MA Bearish',c:'bear'}); }
-    if(ma5&&ma10&&ma5>ma10&&price>ma5) { score+=6; signals.push({t:'Short-Term Bullish',c:'bull'}); }
-  }
-  if(ma20&&price>ma20){ score+=7; if(trend!=='up') trend='up'; }
-  else if(ma20&&price<ma20){ score-=7; if(trend!=='down') trend='down'; }
-
-  // ─── RSI SCORING ───
-  if(r>=40&&r<=60){ score+=8; signals.push({t:`RSI Ideal ${r.toFixed(0)}`,c:'bull'}); }
-  else if(r<30){ score+=12; signals.push({t:`RSI Oversold ${r.toFixed(0)}`,c:'bull'}); }
-  else if(r<40){ score+=5; signals.push({t:`RSI Mendekati Beli ${r.toFixed(0)}`,c:'neu'}); }
-  else if(r>70){ score-=12; signals.push({t:`RSI Overbought ${r.toFixed(0)}`,c:'bear'}); }
-  else if(r>65){ score-=5; signals.push({t:`RSI Tinggi ${r.toFixed(0)}`,c:'neu'}); }
-
-  // ─── MACD SCORING ───
-  if(mc.hist>0&&mc.macd>0){ score+=10; signals.push({t:'MACD Bullish Cross',c:'bull'}); }
-  else if(mc.hist>0&&mc.macd<0){ score+=5; signals.push({t:'MACD Diverge Up',c:'neu'}); }
-  else if(mc.hist<0){ score-=8; signals.push({t:'MACD Bearish',c:'bear'}); }
-
-  // ─── BOLLINGER SCORING ───
-  if(bb.pct<20){ score+=10; signals.push({t:'Di Bawah BB Lower',c:'bull'}); }
-  else if(bb.pct<35){ score+=6; signals.push({t:'BB Zone Beli',c:'bull'}); }
-  else if(bb.pct>80){ score-=8; signals.push({t:'BB Overbought Zone',c:'bear'}); }
-
-  // ─── STOCHASTIC SCORING ───
-  if(st<20){ score+=9; signals.push({t:`Stoch Oversold ${st.toFixed(0)}`,c:'bull'}); }
-  else if(st<30){ score+=5; signals.push({t:`Stoch Murah ${st.toFixed(0)}`,c:'bull'}); }
-  else if(st>80){ score-=8; signals.push({t:`Stoch Overbought ${st.toFixed(0)}`,c:'bear'}); }
-
-  // ─── VOLUME SCORING ───
-  if(volRatio>2&&changePct>0){ score+=12; signals.push({t:`Vol Surge ${volRatio.toFixed(1)}x ▲`,c:'bull'}); }
-  else if(volRatio>1.5&&changePct>0){ score+=8; signals.push({t:`Vol Tinggi ${volRatio.toFixed(1)}x`,c:'bull'}); }
-  else if(volRatio>2&&changePct<0){ score-=8; signals.push({t:`Vol Dump ${volRatio.toFixed(1)}x ▼`,c:'bear'}); }
-  else if(volRatio<0.5){ score-=4; signals.push({t:'Vol Sepi',c:'neu'}); }
-
-  // ─── PRICE ACTION SCORING ───
-  if(changePct>3){ score+=8; signals.push({t:`Breakout +${changePct.toFixed(1)}%`,c:'bull'}); }
-  else if(changePct>1){ score+=4; signals.push({t:`Naik ${changePct.toFixed(1)}%`,c:'bull'}); }
-  else if(changePct<-3){ score-=8; signals.push({t:`Breakdown ${changePct.toFixed(1)}%`,c:'bear'}); }
-
-  // ─── SUPPORT/RESISTANCE ───
-  const recent=closes.slice(-20);
-  const support=Math.min(...recent);
-  const resistance=Math.max(...recent);
-  const distToRes=(resistance-price)/price*100;
-  const distToSup=(price-support)/price*100;
-  if(distToSup<3){ score+=8; signals.push({t:'Dekat Support',c:'bull'}); }
-  if(distToRes>10){ score+=6; signals.push({t:`Ruang Naik ${distToRes.toFixed(0)}%`,c:'bull'}); }
-
-  // ─── TARGET PRICE ───
-  const targetPct = Math.max(5, Math.min(40,
-    (distToRes * 0.6) + (r<40?10:0) + (mc.hist>0?5:0) + (volRatio>1.5?5:0)
-  ));
-  const targetPrice = price * (1 + targetPct/100);
-  const stopLoss = price * (1 - Math.max(3, distToSup*0.5)/100);
-
-  score = Math.max(0, Math.min(100, Math.round(score)));
-
-  // ─── PROFIT TIER ───
-  let tier='C', tierNote='';
-  if(score>=78&&trend==='up'){ tier='S'; tierNote='⭐ PRIME PICK'; }
-  else if(score>=65&&trend==='up'){ tier='A'; tierNote='High Potential'; }
-  else if(score>=50){ tier='B'; tierNote='Monitor'; }
-  else { tier='C'; tierNote='Low Priority'; }
-
-  // ─── RECOMMENDATION ───
-  let rec,recCode;
-  if(score>=75&&trend==='up'){ rec='STRONG BUY'; recCode='sb'; }
-  else if(score>=60&&trend!=='down'){ rec='BUY'; recCode='b'; }
-  else if(score>=40){ rec='HOLD'; recCode='h'; }
-  else if(score>=25){ rec='SELL'; recCode='s'; }
-  else{ rec='STRONG SELL'; recCode='ss'; }
-
-  return {
-    ma5:ma5?.toFixed(0)||'-', ma10:ma10?.toFixed(0)||'-',
-    ma20:ma20?.toFixed(0)||'-', ma50:ma50?.toFixed(0)||'-',
-    rsi:r.toFixed(1), macd:mc.hist.toFixed(2), macdLine:mc.macd.toFixed(2),
-    bb, stoch:st.toFixed(1), volRatio:volRatio.toFixed(2),
-    atr:atrVal.toFixed(2), trend,
-    score, tier, tierNote, signals:signals.slice(0,6),
-    rec, recCode,
-    support:support.toFixed(0), resistance:resistance.toFixed(0),
-    targetPrice:targetPrice.toFixed(0), targetPct:targetPct.toFixed(1),
-    stopLoss:stopLoss.toFixed(0),
-    distToRes:distToRes.toFixed(1)
-  };
-}
-
-// ══════════════════════════════════════════════
-// MAIN SCAN
-// ══════════════════════════════════════════════
-async function runScan(){
-  if(scanning) return;
-  scanning=true;
-
-  const btn=document.getElementById('scan-btn');
-  const progEl=document.getElementById('prog');
-  const pfEl=document.getElementById('pf');
-  const pdEl=document.getElementById('pd');
-  const ptEl=document.getElementById('pt');
-  const ppEl=document.getElementById('pp');
-  const plogEl=document.getElementById('plog');
-  const sumEl=document.getElementById('sum');
-  const tbEl=document.getElementById('tb');
-  const resEl=document.getElementById('results');
-
-  btn.disabled=true;
-  progEl.className='prog show';
-  sumEl.className='sum';
-  tbEl.className='tb';
-  resEl.innerHTML='';
-  allData=[];
-  plogEl.innerHTML='';
-
-  const customRaw=document.getElementById('f-custom').value.trim();
-  const watchlist=customRaw
-    ? customRaw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean)
-    : curWatchlist;
-
-  const maxPrice=parseFloat(document.getElementById('f-price').value)||100;
-  const minPrice=parseFloat(document.getElementById('f-price-min').value)||1;
-  const minVol=parseInt(document.getElementById('f-vol').value)||0;
-  const minRsi=parseFloat(document.getElementById('f-rsi-min').value)||0;
-  const maxRsi=parseFloat(document.getElementById('f-rsi-max').value)||100;
-  const minScore=parseFloat(document.getElementById('f-score').value)||0;
-  const trendF=document.getElementById('f-trend').value;
-  const recF=document.getElementById('f-rec').value;
-
-  ptEl.textContent=watchlist.length;
-
-  function log(msg,cls=''){
-    const d=document.createElement('div');
-    d.className='lg'+(cls?' '+cls:'');
-    d.textContent=msg;
-    plogEl.appendChild(d);
-    plogEl.scrollTop=plogEl.scrollHeight;
-    // Keep only last 8 lines
-    while(plogEl.children.length>8) plogEl.removeChild(plogEl.firstChild);
-  }
-
-  log(`🔍 Scanning ${watchlist.length} saham — Multi-Source: Yahoo Finance + Stooq`,'in');
-  log(`📊 Filter: Harga Rp${minPrice}-${maxPrice} | RSI ${minRsi}-${maxRsi} | Min Score: ${minScore}`,'in');
-
-  let done=0;
-  const BATCH=3; // parallel requests
-
-  for(let i=0;i<watchlist.length;i+=BATCH){
-    const batch=watchlist.slice(i,i+BATCH);
-
-    await Promise.all(batch.map(async ticker=>{
-      try{
-        log(`⏳ Fetching ${ticker}.JK ...`);
-        const raw=await fetchMultiSource(ticker);
-        const ta=calcProfitScore(
-          raw.price, raw.closes, raw.vols||[],
-          raw.highs||null, raw.lows||null, raw.changePct||0
-        );
-
-        // ─ Apply Filters ─
-        if(raw.price<minPrice||raw.price>maxPrice){
-          log(`⊘ ${ticker}: Harga Rp${raw.price.toFixed(0)} diluar range`,'sk'); return;
-        }
-        if(raw.volLot<minVol){
-          log(`⊘ ${ticker}: Vol ${raw.volLot} lot < min ${minVol}`,'sk'); return;
-        }
-        const rsiNum=parseFloat(ta.rsi);
-        if(rsiNum<minRsi||rsiNum>maxRsi){
-          log(`⊘ ${ticker}: RSI ${ta.rsi} diluar range`,'sk'); return;
-        }
-        if(ta.score<minScore){
-          log(`⊘ ${ticker}: Score ${ta.score} < min ${minScore}`,'sk'); return;
-        }
-        if(trendF!=='all'&&ta.trend!==trendF){
-          log(`⊘ ${ticker}: Trend ${ta.trend} ≠ ${trendF}`,'sk'); return;
-        }
-        if(recF==='buy'&&!['sb','b'].includes(ta.recCode)){ return; }
-        if(recF==='hold'&&ta.recCode!=='h'){ return; }
-
-        const result={
-          ticker, name:raw.name, sector:SECTOR_MAP[ticker]||'Lainnya',
-          price:raw.price, change:raw.change||0, changePct:raw.changePct||0,
-          volLot:raw.volLot||0, dayHigh:raw.dayHigh||raw.price, dayLow:raw.dayLow||raw.price,
-          week52H:raw.week52H||raw.price, week52L:raw.week52L||raw.price,
-          crossValid:raw.crossValid||'—', confidence:raw.confidence||60,
-          sources:raw.sources||'—',
-          ...ta
-        };
-
-        allData.push(result);
-        log(`✓ ${ticker}: Rp${raw.price.toFixed(0)} | ${ta.trend.toUpperCase()} | Score:${ta.score} | RSI:${ta.rsi} | Tier:${ta.tier}`,'ok');
-
-      } catch(e){
-        log(`✗ ${ticker}: ${e.message}`,'er');
-      }
-    }));
-
-    done+=batch.length;
-    pdEl.textContent=Math.min(done,watchlist.length);
-    const pct=Math.round(done/watchlist.length*100);
-    ppEl.textContent=pct;
-    pfEl.style.width=pct+'%';
-  }
-
-  // Sort by profit score desc
-  allData.sort((a,b)=>b.score-a.score);
-  renderAll(allData);
-  renderSum(allData);
-  sumEl.className='sum show';
-  tbEl.className='tb show';
-
-  const found=allData.length;
-  const tierSA=allData.filter(s=>['S','A'].includes(s.tier)).length;
-  log(`✅ Selesai! ${found} saham lulus filter. Tier S/A: ${tierSA} saham.`,'in');
-
-  btn.disabled=false;
-  scanning=false;
-}
-
-// ══════════════════════════════════════════════
-// RENDER
-// ══════════════════════════════════════════════
-function renderAll(arr){
-  const el=document.getElementById('results');
-  el.innerHTML='';
-  if(!arr.length){
-    el.innerHTML='<div class="empty">Tidak ada saham yang memenuhi filter.<br>Coba kurangi Min Score atau longgarkan filter RSI/Trend.</div>';
+function startQuiz() {
+  studentName = document.getElementById('studentName').value.trim();
+  if (!studentName) {
+    document.getElementById('studentName').focus();
+    document.getElementById('studentName').style.borderColor = 'var(--fire)';
+    document.getElementById('studentName').placeholder = '⚠️ Nama wajib diisi!';
     return;
   }
-  arr.forEach((s,i)=>el.appendChild(buildCard(s,i+1)));
+
+  questions = shuffle(ALL_QUESTIONS).slice(0, 100);
+  currentQ = 0;
+  score = 0;
+  correct = 0;
+  wrong = 0;
+  answered = false;
+
+  document.getElementById('qStudentName').textContent = studentName;
+  showScreen('quiz');
+  loadQuestion();
 }
 
-function buildCard(s,rank){
-  const tCls=s.trend==='up'?'up':s.trend==='down'?'down':'side';
-  const chgCls=s.changePct>=0?'pos':'neg';
-  const chgSign=s.changePct>=0?'+':'';
-  const sCls=s.score>=65?'h':s.score>=40?'m':'l';
-  const rsiNum=parseFloat(s.rsi);
-  const rsiColor=rsiNum>70?'var(--red)':rsiNum<30?'var(--green)':'var(--accent)';
-  const confColor=s.confidence>=85?'var(--green)':s.confidence>=70?'var(--gold)':'var(--red)';
-  const scoreColor=s.score>=65?'var(--green)':s.score>=40?'var(--gold)':'var(--red)';
+function loadQuestion() {
+  if (currentQ >= questions.length) {
+    showResult();
+    return;
+  }
 
-  const sigHTML=(s.signals||[]).map(sg=>`<span class="sig ${sg.c}">${sg.t}</span>`).join('');
+  answered = false;
+  const q = questions[currentQ];
+  const letters = ['A','B','C','D','E'];
 
-  const card=document.createElement('div');
-  card.className=`card ${tCls} tier-${s.tier.toLowerCase()}`;
-  card.style.animationDelay=`${(rank-1)*0.04}s`;
-  card.dataset.ticker=s.ticker;
-  card.dataset.score=s.score;
-  card.dataset.price=s.price;
-  card.dataset.change=s.changePct;
-  card.dataset.rsi=rsiNum;
-  card.dataset.vol=s.volLot;
-  card.dataset.target=parseFloat(s.targetPct);
-  card.dataset.trend=s.trend;
+  document.getElementById('qCounter').textContent = `Q ${currentQ + 1} / 100`;
+  document.getElementById('qBadge').textContent = `SOAL ${currentQ + 1}`;
+  document.getElementById('qCategory').textContent = `📂 Kategori: ${q.cat}`;
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('progressBar').style.width = `${((currentQ) / 100) * 100}%`;
+  document.getElementById('scoreLive').textContent = `SCORE: ${score}`;
+  document.getElementById('qNavInfo').textContent = `✅ ${correct} Benar  ❌ ${wrong} Salah`;
+  document.getElementById('btnNext').style.display = 'none';
 
-  card.innerHTML=`
-    <span class="tier-flag ${s.tier}">${s.tier} ${s.tierNote}</span>
+  const feedback = document.getElementById('feedbackMsg');
+  feedback.className = 'feedback-msg';
+  feedback.textContent = '';
 
-    <div class="c-rank"><span>${rank}</span>#</div>
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
 
-    <div class="c-info">
-      <div class="ticker">${s.ticker}.JK</div>
-      <div class="name">${s.name||s.ticker}</div>
-      <span class="sector">${s.sector}</span>
-      <br>
-      <a class="stockbit-link" href="https://stockbit.com/#/symbol/${s.ticker}" target="_blank" rel="noopener">
-        📈 Buka Stockbit
-      </a>
-    </div>
+  // Shuffle options
+  const optIndexes = shuffle([0,1,2,3,4]);
 
-    <div class="c-ind">
-      <div class="sigs">${sigHTML||'<span class="sig info">Analyzing...</span>'}</div>
-      <div class="ta-grid">
-        <div class="ta-item"><span class="ta-v">${s.ma5}</span><span class="ta-l">MA5</span></div>
-        <div class="ta-item"><span class="ta-v">${s.ma10}</span><span class="ta-l">MA10</span></div>
-        <div class="ta-item"><span class="ta-v">${s.ma20}</span><span class="ta-l">MA20</span></div>
-        <div class="ta-item"><span class="ta-v">${s.ma50}</span><span class="ta-l">MA50</span></div>
-        <div class="ta-item"><span class="ta-v" style="color:${rsiColor}">${s.rsi}</span><span class="ta-l">RSI</span></div>
-        <div class="ta-item"><span class="ta-v">${s.stoch}</span><span class="ta-l">Stoch</span></div>
-        <div class="ta-item"><span class="ta-v">${s.macd}</span><span class="ta-l">MACD</span></div>
-        <div class="ta-item"><span class="ta-v">${s.volRatio}x</span><span class="ta-l">Vol/Avg</span></div>
-      </div>
-      <div class="score-wrap">
-        <span class="score-n" style="color:${scoreColor}">${s.score}</span>
-        <div class="score-bar"><div class="score-fill-bar ${sCls}" style="width:${s.score}%"></div></div>
-        <span class="score-sub">S:${s.support} R:${s.resistance} | BB:${s.bb?.pct?.toFixed(0)||'?'}%</span>
-      </div>
-      <div class="confidence">
-        <span class="conf-dot" style="background:${confColor}"></span>
-        Data: ${s.sources} | Validasi: ${s.crossValid} | Confidence: ${s.confidence}%
-      </div>
-    </div>
-
-    <div class="c-price">
-      <div class="price-big">Rp ${s.price<10?s.price.toFixed(2):s.price.toFixed(0)}</div>
-      <div class="price-chg ${chgCls}">${chgSign}${s.changePct.toFixed(2)}%</div>
-      <div class="price-meta">
-        H: ${s.dayHigh?.toFixed(0)||'?'} / L: ${s.dayLow?.toFixed(0)||'?'}<br>
-        52W H: ${s.week52H?.toFixed(0)||'?'}<br>
-        Vol: ${(s.volLot||0).toLocaleString('id')} lot<br>
-        ATR: ${s.atr}
-      </div>
-      <div class="target-price">
-        🎯 Target: Rp${s.targetPrice}<br>
-        +${s.targetPct}% | SL: Rp${s.stopLoss}
-      </div>
-    </div>
-
-    <div class="c-act">
-      <span class="rec ${s.recCode}">${s.rec}</span>
-      <div class="rsi-mini">RSI ${s.rsi}</div>
-      <div class="rsi-mini-bar">
-        <div class="rsi-mini-fill" style="width:${rsiNum}%;background:${rsiColor};"></div>
-      </div>
-      <div style="font-size:8px;color:var(--text2);margin-top:5px;">${s.trend.toUpperCase()}</div>
-      <div style="font-size:8px;color:var(--text2);margin-top:3px;">Ruang: +${s.distToRes}%</div>
-    </div>
-  `;
-  return card;
-}
-
-function renderSum(arr){
-  document.getElementById('s0').textContent=arr.length;
-  document.getElementById('s1').textContent=arr.filter(s=>s.trend==='up').length;
-  document.getElementById('s2').textContent=arr.filter(s=>s.trend==='down').length;
-  document.getElementById('s3').textContent=arr.filter(s=>['sb','b'].includes(s.recCode)).length;
-  document.getElementById('s4').textContent=arr.filter(s=>['S','A'].includes(s.tier)).length;
-  const avg=arr.length?Math.round(arr.reduce((a,b)=>a+b.score,0)/arr.length):0;
-  document.getElementById('s5').textContent=avg;
-  const avgT=arr.length?(arr.reduce((a,b)=>a+parseFloat(b.targetPct||0),0)/arr.length).toFixed(1):0;
-  document.getElementById('s6').textContent='+'+avgT+'%';
-}
-
-// ══════════════════════════════════════════════
-// SORT & SEARCH
-// ══════════════════════════════════════════════
-function doSort(by,btn){
-  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  const sorted=[...allData].sort((a,b)=>{
-    if(by==='score') return b.score-a.score;
-    if(by==='target') return parseFloat(b.targetPct)-parseFloat(a.targetPct);
-    if(by==='price') return a.price-b.price;
-    if(by==='change') return b.changePct-a.changePct;
-    if(by==='rsi') return parseFloat(a.rsi)-parseFloat(b.rsi);
-    if(by==='vol') return b.volLot-a.volLot;
-    return 0;
+  optIndexes.forEach((origIdx, displayPos) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[displayPos]}</span><span>${q.opts[origIdx]}</span>`;
+    btn.dataset.original = origIdx;
+    btn.onclick = () => selectAnswer(btn, origIdx, q.ans);
+    grid.appendChild(btn);
   });
-  renderAll(sorted);
+
+  grid.classList.remove('q-animate');
+  void grid.offsetWidth;
+  grid.classList.add('q-animate');
 }
 
-function doSearch(q){
-  document.querySelectorAll('.card').forEach(c=>{
-    c.style.display=(c.dataset.ticker||'').toLowerCase().includes(q.toLowerCase())?'grid':'none';
+function selectAnswer(btn, selected, correct_ans) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    const origIdx = parseInt(b.dataset.original);
+    if (origIdx === correct_ans) {
+      b.classList.add('reveal-correct');
+      if (origIdx !== selected) b.classList.add('correct');
+    }
   });
+
+  const feedback = document.getElementById('feedbackMsg');
+
+  if (selected === correct_ans) {
+    btn.classList.add('correct');
+    score += 10;
+    correct++;
+    feedback.textContent = '✅ Benar! +10 poin';
+    feedback.className = 'feedback-msg correct';
+  } else {
+    btn.classList.add('wrong');
+    wrong++;
+    const correctBtn = [...allBtns].find(b => parseInt(b.dataset.original) === correct_ans);
+    if (correctBtn) correctBtn.classList.add('correct');
+    feedback.textContent = '❌ Salah! Jawaban yang benar sudah ditandai hijau.';
+    feedback.className = 'feedback-msg wrong';
+  }
+
+  document.getElementById('scoreLive').textContent = `SCORE: ${score}`;
+  document.getElementById('btnNext').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  currentQ++;
+  loadQuestion();
+}
+
+function showResult() {
+  document.getElementById('progressBar').style.width = '100%';
+  const pct = Math.round((correct / 100) * 100);
+
+  showScreen('result');
+
+  document.getElementById('resultName').textContent = studentName.toUpperCase();
+  document.getElementById('resultScore').textContent = score;
+  document.getElementById('resultScoreSub').textContent = `${correct} dari 100 soal benar • ${pct}% akurasi`;
+  document.getElementById('resCorrect').textContent = correct;
+  document.getElementById('resWrong').textContent = wrong;
+  document.getElementById('resPoints').textContent = score;
+
+  const rankBadge = document.getElementById('rankBadge');
+  if (pct >= 85) {
+    rankBadge.textContent = '🏆 EXPERT RIDER';
+    rankBadge.className = 'result-rank-badge rank-expert';
+  } else if (pct >= 70) {
+    rankBadge.textContent = '⭐ ADVANCED RIDER';
+    rankBadge.className = 'result-rank-badge rank-advanced';
+  } else if (pct >= 50) {
+    rankBadge.textContent = '🔧 INTERMEDIATE RIDER';
+    rankBadge.className = 'result-rank-badge rank-intermediate';
+  } else {
+    rankBadge.textContent = '🌱 BEGINNER RIDER';
+    rankBadge.className = 'result-rank-badge rank-beginner';
+  }
+
+  setTimeout(() => {
+    document.getElementById('perfBar').style.width = pct + '%';
+  }, 300);
+}
+
+function restartQuiz() {
+  questions = shuffle(ALL_QUESTIONS).slice(0, 100);
+  currentQ = 0;
+  score = 0;
+  correct = 0;
+  wrong = 0;
+  answered = false;
+  showScreen('quiz');
+  loadQuestion();
+}
+
+function goHome() {
+  showScreen('dashboard');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 </script>
 </body>
